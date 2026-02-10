@@ -19,7 +19,7 @@ export const Footer: React.FC = () => {
               Referência em atendimento médico na Bahia. Agilidade, confiança e profissionais qualificados para cuidar da sua saúde e da sua família.
             </p>
             <div className="text-xs text-slate-500">
-              <p>CNPJ: 00.000.000/0001-00</p>
+              <p>CNPJ: 09.157.211/0002-98</p>
               <p>Responsável Técnico: Dr. Nome Sobrenome (CRM/BA 0000)</p>
             </div>
           </div>
