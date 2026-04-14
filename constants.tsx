@@ -8,9 +8,10 @@ import {
   Activity,
   TestTube,
   Waves,
-  CalendarCheck
+  Sparkles,
+  AlignCenter,
 } from 'lucide-react';
-import { ServiceItem, FaqItem, ContactInfo, NavLink } from './types';
+import { ServiceItem, FaqItem, ContactInfo } from './types';
 
 export const CONTACT_INFO: ContactInfo = {
   phone: "(74) 99816-2793",
@@ -20,14 +21,8 @@ export const CONTACT_INFO: ContactInfo = {
   email: "contato@cmb.com.br"
 };
 
-export const NAV_LINKS: NavLink[] = [
-  { label: 'Home', path: '/' },
-  { label: 'A Clínica', path: '/a-clinica' },
-  { label: 'Especialidades', path: '/especialidades' },
-  { label: 'Exames', path: '/exames' },
-  { label: 'Agendamento', path: '/agendamento' },
-  { label: 'Contato', path: '/contato' },
-];
+
+
 
 export const SPECIALTIES: ServiceItem[] = [
   {
@@ -38,7 +33,7 @@ export const SPECIALTIES: ServiceItem[] = [
   },
   {
     id: 'ginecologia',
-    title: 'Ginecologista',
+    title: 'Ginecologia & Ultrassonografia',
     description: 'Saúde da mulher, prevenção e acompanhamento em todas as fases.',
     icon: Flower
   },
@@ -68,7 +63,7 @@ export const SPECIALTIES: ServiceItem[] = [
   },
   {
     id: 'ortodontia',
-    title: 'Ortodontia',
+    title: 'Ortodontia Especializada',
     description: 'Correção da posição dos dentes e dos ossos maxilares.',
     icon: Smile
   }

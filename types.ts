@@ -13,10 +13,7 @@ export interface FaqItem {
   answer: string;
 }
 
-export interface NavLink {
-  label: string;
-  path: string;
-}
+
 
 export interface ContactInfo {
   phone: string;

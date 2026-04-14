@@ -1,14 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Phone, MapPin, Clock, Mail } from 'lucide-react';
-import { CONTACT_INFO, NAV_LINKS } from '../constants';
+import { CONTACT_INFO } from '../constants';
 import { Logo } from './Logo';
 
 export const Footer: React.FC = () => {
   return (
     <footer className="bg-slate-900 text-slate-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
           {/* Brand & Description */}
           <div>
@@ -20,25 +19,7 @@ export const Footer: React.FC = () => {
             </p>
             <div className="text-xs text-slate-500">
               <p>CNPJ: 09.157.211/0002-98</p>
-
             </div>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-white font-semibold mb-4 uppercase tracking-wider text-sm">Navegação</h3>
-            <ul className="space-y-2">
-              {NAV_LINKS.map((link) => (
-                <li key={link.path}>
-                  <Link
-                    to={link.path}
-                    className="text-sm hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </div>
 
           {/* Contact Info */}

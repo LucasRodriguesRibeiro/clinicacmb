@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { CalendarCheck, ShieldCheck, Clock, ArrowRight, Activity, Stethoscope, FileText, Syringe, FlaskConical, Waves } from 'lucide-react';
 import { Section } from '../components/Section';
 import { Button } from '../components/Button';
@@ -55,11 +54,16 @@ export const Home: React.FC = () => {
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
-            <Link to="/agendamento" className="w-full sm:w-auto">
+            <a
+              href={`https://wa.me/55${CONTACT_INFO.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent("Olá, gostaria de agendar uma consulta.")}`}
+              target="_blank"
+              rel="noreferrer"
+              className="w-full sm:w-auto"
+            >
               <Button className="w-full h-12 text-sm sm:text-base px-8 bg-white text-primary-700 hover:bg-blue-50 border-transparent shadow-lg font-bold">
                 Agendar consulta
               </Button>
-            </Link>
+            </a>
             <a
               href={`https://wa.me/55${CONTACT_INFO.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent("Olá, vim pelo site da Clínica CMB.")}`}
               target="_blank"
@@ -141,13 +145,7 @@ export const Home: React.FC = () => {
             </div>
           ))}
         </div>
-        <div className="mt-10 text-center">
-          <Link to="/especialidades">
-            <Button variant="outline" className="inline-flex items-center">
-              Ver todas as especialidades <ArrowRight className="ml-2 w-4 h-4" />
-            </Button>
-          </Link>
-        </div>
+
       </Section>
 
       {/* EXAMS PREVIEW */}
@@ -175,9 +173,14 @@ export const Home: React.FC = () => {
                 </li>
               ))}
             </ul>
-            <Link to="/exames">
-              <Button variant="secondary" className="bg-white text-primary-700 hover:bg-primary-50">Confira todos os exames</Button>
-            </Link>
+            <div className="mt-6 flex justify-center">
+              <a href={`https://wa.me/55${CONTACT_INFO.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent('Olá, gostaria de agendar um exame.')}`} target="_blank" rel="noopener noreferrer" className="inline-block">
+                <Button variant="primary" className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-md font-semibold shadow-md">
+                  Agendar Exame
+                </Button>
+              </a>
+            </div>
+
           </div>
           <div className="mt-10 lg:mt-0 lg:w-1/2 lg:pl-10 relative">
             {/* Abstract Geometric Composition */}
@@ -263,6 +266,7 @@ export const Home: React.FC = () => {
         <FaqAccordion items={FAQS} />
       </Section>
 
+
       {/* CTA STRIP */}
       <div className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-brand"></div>
@@ -280,11 +284,11 @@ export const Home: React.FC = () => {
             Não deixe para depois. Agende sua consulta ou exame no Centro Médico da Bahia e tenha o atendimento que você merece.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6">
-            <Link to="/agendamento">
+            <a href={`https://wa.me/55${CONTACT_INFO.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent("Olá, gostaria de agendar uma consulta.")}`} target="_blank" rel="noreferrer">
               <Button className="w-full sm:w-auto bg-white text-primary-700 hover:bg-slate-50 border-transparent shadow-xl h-14 px-8 text-lg">
                 Agendar Consulta
               </Button>
-            </Link>
+            </a>
             <a href={`https://wa.me/55${CONTACT_INFO.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent("Olá, vim pelo site da Clínica CMB.")}`} target="_blank" rel="noreferrer">
               <Button variant="whatsapp" className="w-full sm:w-auto h-14 px-8 text-lg shadow-xl ring-2 ring-white/20">
                 Falar no WhatsApp

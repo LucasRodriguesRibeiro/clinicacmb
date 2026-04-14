@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 interface SectionProps {
   children: React.ReactNode;
@@ -24,9 +25,15 @@ export const Section: React.FC<SectionProps> = ({
       {(background === 'gray' || background === 'blue') && (
         <div className="absolute inset-0 opacity-10 bg-pattern-dots pointer-events-none"></div>
       )}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.div 
+        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
         {children}
-      </div>
+      </motion.div>
     </section>
   );
 };
