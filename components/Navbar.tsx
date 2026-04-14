@@ -20,10 +20,11 @@ export const Navbar: React.FC = () => {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-2 rounded-full font-medium text-sm flex items-center transition-colors shadow-md"
+            className="bg-primary-600 hover:bg-primary-700 text-white px-4 sm:px-6 py-2 rounded-full font-bold text-xs sm:text-sm flex items-center transition-colors shadow-md whitespace-nowrap"
           >
-            <CalendarCheck className="w-4 h-4 mr-2" />
-            Agendar Consulta
+            <CalendarCheck className="w-4 h-4 mr-1 sm:mr-2" />
+            <span className="hidden sm:inline">Agendar Consulta</span>
+            <span className="inline sm:hidden">Agendar</span>
           </a>
         </div>
       </div>

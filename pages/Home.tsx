@@ -7,7 +7,7 @@ import { SPECIALTIES, EXAMS, CONTACT_INFO, FAQS } from '../constants';
 
 export const Home: React.FC = () => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col overflow-x-hidden w-full">
       {/* HERO SECTION */}
       <div className="relative bg-gradient-to-b from-primary-600 to-primary-800 overflow-hidden py-12 lg:py-20 text-white">
         {/* Background Pattern */}
@@ -24,7 +24,7 @@ export const Home: React.FC = () => {
           </div>
 
           {/* Headline */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight mb-3 sm:mb-4 leading-tight drop-shadow-md">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight mb-3 sm:mb-4 leading-tight drop-shadow-md break-words">
             Sua saúde em <span className="text-blue-200">primeiro lugar</span>
           </h1>
 
@@ -34,20 +34,20 @@ export const Home: React.FC = () => {
           </p>
 
           {/* Benefits Grid - Horizontal & Compact */}
-          <div className="grid grid-cols-3 md:grid-cols-3 gap-2 sm:gap-4 mb-8 sm:mb-10 max-w-4xl mx-auto">
-            <div className="bg-white/10 backdrop-blur-md rounded-xl p-2 sm:p-4 border border-white/5 flex flex-col items-center hover:bg-white/20 transition-colors">
+          <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-8 sm:mb-10 max-w-4xl mx-auto w-full">
+            <div className="bg-white/10 backdrop-blur-md rounded-xl p-1.5 sm:p-4 border border-white/5 flex flex-col items-center justify-center text-center hover:bg-white/20 transition-colors">
               <Stethoscope className="w-5 h-5 sm:w-6 sm:h-6 text-blue-300 mb-1 sm:mb-2" />
-              <span className="font-bold text-[10px] sm:text-sm leading-tight">Especialidades</span>
+              <span className="font-bold text-[10px] sm:text-sm leading-tight break-words px-1">Especialidades</span>
               <span className="hidden sm:block text-xs text-blue-100 opacity-80 mt-1">Clínico, pediatria e mais</span>
             </div>
-            <div className="bg-white/10 backdrop-blur-md rounded-xl p-2 sm:p-4 border border-white/5 flex flex-col items-center hover:bg-white/20 transition-colors">
+            <div className="bg-white/10 backdrop-blur-md rounded-xl p-1.5 sm:p-4 border border-white/5 flex flex-col items-center justify-center text-center hover:bg-white/20 transition-colors">
               <Activity className="w-5 h-5 sm:w-6 sm:h-6 text-blue-300 mb-1 sm:mb-2" />
-              <span className="font-bold text-[10px] sm:text-sm leading-tight">Exames</span>
+              <span className="font-bold text-[10px] sm:text-sm leading-tight break-words px-1">Exames</span>
               <span className="hidden sm:block text-xs text-blue-100 opacity-80 mt-1">Laboratório e Imagem</span>
             </div>
-            <div className="bg-white/10 backdrop-blur-md rounded-xl p-2 sm:p-4 border border-white/5 flex flex-col items-center hover:bg-white/20 transition-colors">
+            <div className="bg-white/10 backdrop-blur-md rounded-xl p-1.5 sm:p-4 border border-white/5 flex flex-col items-center justify-center text-center hover:bg-white/20 transition-colors">
               <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6 text-blue-300 mb-1 sm:mb-2" />
-              <span className="font-bold text-[10px] sm:text-sm leading-tight text-center">Atendimento</span>
+              <span className="font-bold text-[10px] sm:text-sm leading-tight text-center break-words px-1">Atendimento</span>
               <span className="hidden sm:block text-xs text-blue-100 opacity-80 mt-1">Cuidado em cada etapa</span>
             </div>
           </div>
@@ -86,12 +86,12 @@ export const Home: React.FC = () => {
 
       {/* O QUE VOCÊ ENCONTRA NA CMB */}
       <Section background="white" className="relative -mt-16 z-20 pt-0">
-        <div className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-slate-100 p-8 md:p-12">
-          <div className="text-center mb-12">
+        <div className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-slate-100 p-5 sm:p-8 md:p-12">
+          <div className="text-center mb-10 sm:mb-12">
             <h2 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">Tudo para sua saúde</h2>
             <p className="mt-4 text-xl text-slate-500">Completa infraestrutura para cuidar de você.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="group bg-white p-8 rounded-2xl border border-slate-100 text-center hover:shadow-glow transition-all duration-300 transform hover:-translate-y-2">
               <div className="w-16 h-16 bg-blue-50 text-primary-600 rounded-2xl rotate-3 group-hover:rotate-0 transition-transform flex items-center justify-center mx-auto mb-6">
                 <Stethoscope className="w-8 h-8" />
@@ -112,13 +112,6 @@ export const Home: React.FC = () => {
               </div>
               <h3 className="text-lg font-bold text-slate-900 mb-2">Check-ups</h3>
               <p className="text-sm text-slate-600">Prevenção completa para uma vida longa.</p>
-            </div>
-            <div className="group bg-white p-8 rounded-2xl border border-slate-100 text-center hover:shadow-glow transition-all duration-300 transform hover:-translate-y-2">
-              <div className="w-16 h-16 bg-blue-50 text-primary-600 rounded-2xl -rotate-3 group-hover:rotate-0 transition-transform flex items-center justify-center mx-auto mb-6">
-                <Syringe className="w-8 h-8" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">Vacinas</h3>
-              <p className="text-sm text-slate-600">Imunização para todas as idades.</p>
             </div>
           </div>
         </div>
@@ -182,9 +175,9 @@ export const Home: React.FC = () => {
             </div>
 
           </div>
-          <div className="mt-10 lg:mt-0 lg:w-1/2 lg:pl-10 relative">
+          <div className="mt-12 lg:mt-0 lg:w-1/2 lg:pl-10 relative">
             {/* Abstract Geometric Composition */}
-            <div className="relative h-[450px] w-full rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden flex items-center justify-center group">
+            <div className="relative h-auto py-12 lg:h-[450px] lg:py-0 w-full rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden flex items-center justify-center group">
 
               {/* Background Gradients */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-blue-400 rounded-full mix-blend-overlay filter blur-3xl opacity-20 animate-pulse-slow"></div>
@@ -201,7 +194,7 @@ export const Home: React.FC = () => {
               </div>
 
               {/* Icons Grid */}
-              <div className="relative z-10 grid grid-cols-2 gap-6 p-6 w-full max-w-md">
+              <div className="relative z-10 grid grid-cols-2 gap-4 sm:gap-6 p-4 sm:p-6 w-full max-w-md">
 
                 {/* ECG Icon */}
                 <div className="aspect-square flex flex-col items-center justify-center p-4 bg-white/10 rounded-2xl backdrop-blur-md border border-white/10 shadow-lg transform hover:scale-105 transition-all duration-300">
