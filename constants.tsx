@@ -74,7 +74,7 @@ export const DOCTORS: Doctor[] = [
   {
     id: 'dr-jair-mendes',
     name: 'Dr. Jair Mendes',
-    specialty: 'Cirurgião-Dentista',
+    specialty: 'Cirurgião-Dentista e Ortodontista',
     crm: 'CRM-BA —',
     days: 'A consultar',
     initials: 'JM',
