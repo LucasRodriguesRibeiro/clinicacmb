@@ -1,0 +1,34 @@
+[
+  {
+    "path": "/",
+    "title": "CMB - Centro Médico da Bahia | Clínica Médica em Jussara - BA",
+    "description": "Agende sua consulta ou exame no CMB - Centro Médico da Bahia. Especialistas em Ortopedia, Cardiologia, Ginecologia, Ultrassonografia, Pediatria e mais. Atendimento rápido e humanizado no coração da Bahia.",
+    "changefreq": "weekly",
+    "priority": 1.0,
+    "keywords": "centro medico da bahia, clinica cmb jussara, clinica medica jussara, ortopedista jussara, ginecologista jussara, cardiologista jussara, ultrassom jussara"
+  },
+  {
+    "path": "/corpo-clinico",
+    "title": "Corpo Clínico - CMB | Médicos Especialistas em Jussara - BA",
+    "description": "Conheça nossos médicos especialistas no Centro Médico da Bahia. Atendimento humanizado em Ortopedia, Pediatria, Ginecologia, Cardiologia, Ortodontia e Clínica Geral.",
+    "changefreq": "monthly",
+    "priority": 0.8,
+    "keywords": "medicos jussara, corpo clinico cmb, dr misterbrando ortopedista, dr paulo cesar pediatra, dr jose edjevandio ginecologista, dra josy silva dentista"
+  },
+  {
+    "path": "/exames",
+    "title": "Exames e Procedimentos - CMB | Diagnósticos e Ultrassonografia",
+    "description": "Realize seus exames laboratoriais, eletrocardiograma (ECG), preventivo e ultrassonografias no CMB. Estrutura moderna e laudos rápidos em Jussara.",
+    "changefreq": "monthly",
+    "priority": 0.8,
+    "keywords": "exames laboratoriais jussara, ultrassom jussara, preventivo papanicolau, ecg jussara, biopsia colo uterino jussara"
+  },
+  {
+    "path": "/contato",
+    "title": "Contato e Localização - CMB | Centro Médico da Bahia",
+    "description": "Fale com o Centro Médico da Bahia. Localizada na Praça João Batista, 40, Centro de Jussara - BA. Agende pelo WhatsApp (74) 99816-2793.",
+    "changefreq": "monthly",
+    "priority": 0.8,
+    "keywords": "contato clinica cmb, whatsapp cmb clinica, telefone centro medico da bahia, endereco cmb jussara"
+  }
+]

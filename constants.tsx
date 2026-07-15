@@ -35,7 +35,7 @@ export const DOCTORS: Doctor[] = [
     days: 'A consultar',
     initials: 'MB',
     color: '#0891b2',
-    photo: '/profissionais/misterbrando.png',
+    photo: '/profissionais/misterbrando.webp',
     photoPosition: 'center 30%',
   },
   {
@@ -46,7 +46,7 @@ export const DOCTORS: Doctor[] = [
     days: 'A consultar',
     initials: 'PC',
     color: '#059669',
-    photo: '/profissionais/dr-paulo.png',
+    photo: '/profissionais/dr-paulo.webp',
     photoPosition: 'center 25%',
   },
   {
@@ -57,7 +57,7 @@ export const DOCTORS: Doctor[] = [
     days: 'A consultar',
     initials: 'JE',
     color: '#7c3aed',
-    photo: '/profissionais/jose-edvando.png',
+    photo: '/profissionais/jose-edvando.webp',
     photoPosition: 'center 25%',
   },
   {
@@ -68,7 +68,7 @@ export const DOCTORS: Doctor[] = [
     days: 'A consultar',
     initials: 'JS',
     color: '#db2777',
-    photo: '/profissionais/dra-josy.png',
+    photo: '/profissionais/dra-josy.webp',
     photoPosition: 'center 30%',
   },
   {
@@ -79,7 +79,7 @@ export const DOCTORS: Doctor[] = [
     days: 'A consultar',
     initials: 'JM',
     color: '#0a376c',
-    photo: '/profissionais/jair-mendes.png',
+    photo: '/profissionais/jair-mendes.webp',
     photoPosition: 'center 25%',
   },
   {
@@ -90,7 +90,7 @@ export const DOCTORS: Doctor[] = [
     days: 'A consultar',
     initials: 'DM',
     color: '#D32F2F',
-    photo: '/profissionais/denivan-machado.png',
+    photo: '/profissionais/denivan-machado.webp',
     photoPosition: 'center 30%',
   },
 ];

@@ -1,0 +1,121 @@
+import React from 'react';
+import { useLocation } from 'react-router-dom';
+import { MetaTags } from './MetaTags';
+import { StructuredData } from './StructuredData';
+import routesData from '../routes.json';
+import { DOCTORS, FAQS } from '../../constants';
+import { getMedicalClinicSchema } from '../schemas/medicalClinic';
+import { getPhysicianSchema, getDoctorsListSchema } from '../schemas/physician';
+import { getFaqSchema } from '../schemas/faq';
+import { getBreadcrumbSchema } from '../schemas/breadcrumb';
+
+interface RouteSEO {
+  path: string;
+  title: string;
+  description: string;
+  changefreq: string;
+  priority: number;
+  keywords: string;
+}
+
+export const SEOManager: React.FC = () => {
+  const { pathname } = useLocation();
+  const url = 'https://cmbclinica.com.br';
+
+  // 1. Identify current route metadata
+  let currentMeta: RouteSEO | null = null;
+  let isDoctorRoute = false;
+  let matchedDoctor: typeof DOCTORS[0] | null = null;
+
+  // Check static routes
+  const matchedRoute = (routesData as RouteSEO[]).find(
+    (r) => r.path === pathname || (r.path !== '/' && pathname.startsWith(r.path))
+  );
+
+  if (matchedRoute) {
+    currentMeta = matchedRoute;
+  }
+
+  // Check doctor route: /medicos/:id
+  const doctorMatch = pathname.match(/^\/medicos\/([a-zA-Z0-9-]+)$/);
+  if (doctorMatch) {
+    const docId = doctorMatch[1];
+    const doc = DOCTORS.find((d) => d.id === docId);
+    if (doc) {
+      isDoctorRoute = true;
+      matchedDoctor = doc;
+      currentMeta = {
+        path: pathname,
+        title: `${doc.name} - ${doc.specialty} em Jussara - BA | CMB Clínica`,
+        description: `Agende sua consulta com ${doc.name}, especialista em ${doc.specialty} no Centro Médico da Bahia (CMB) em Jussara - BA. Atendimento humanizado e de confiança.`,
+        changefreq: 'monthly',
+        priority: 0.8,
+        keywords: `${doc.name.toLowerCase()}, ${doc.specialty.toLowerCase()} jussara, cmb clinica medicos, medico jussara ba`
+      };
+    }
+  }
+
+  // Fallback metadata if not matched
+  if (!currentMeta) {
+    currentMeta = (routesData as RouteSEO[]).find((r) => r.path === '/') || {
+      path: '/',
+      title: 'CMB - Centro Médico da Bahia',
+      description: 'Agende sua consulta ou exame no CMB - Centro Médico da Bahia.',
+      changefreq: 'weekly',
+      priority: 1.0,
+      keywords: 'clinica cmb, centro medico da bahia'
+    };
+  }
+
+  const canonicalUrl = `${url}${pathname}`;
+
+  // 2. Select schemas to render
+  const schemas: object[] = [];
+
+  // Breadcrumbs schema for all pages
+  const breadcrumbItems = [
+    { name: 'Início', item: `${url}/` }
+  ];
+  if (pathname !== '/') {
+    if (isDoctorRoute && matchedDoctor) {
+      breadcrumbItems.push({ name: 'Corpo Clínico', item: `${url}/corpo-clinico` });
+      breadcrumbItems.push({ name: matchedDoctor.name, item: canonicalUrl });
+    } else {
+      const pageName = pathname === '/corpo-clinico' ? 'Corpo Clínico' :
+                       pathname === '/exames' ? 'Exames' :
+                       pathname === '/contato' ? 'Contato' : 'Página';
+      breadcrumbItems.push({ name: pageName, item: canonicalUrl });
+    }
+  }
+  schemas.push(getBreadcrumbSchema(breadcrumbItems));
+
+  // Page-specific schemas
+  if (pathname === '/') {
+    // MedicalClinic combined graph (MedicalClinic, LocalBusiness, Organization, WebSite, SearchAction)
+    schemas.push(getMedicalClinicSchema());
+    // FAQ Schema
+    schemas.push(getFaqSchema(FAQS));
+    // Doctor list
+    schemas.push(getDoctorsListSchema(DOCTORS));
+  } else if (pathname === '/corpo-clinico') {
+    schemas.push(getDoctorsListSchema(DOCTORS));
+  } else if (isDoctorRoute && matchedDoctor) {
+    schemas.push(getPhysicianSchema(matchedDoctor));
+  }
+
+  return (
+    <>
+      <MetaTags
+        title={currentMeta.title}
+        description={currentMeta.description}
+        canonicalUrl={canonicalUrl}
+        keywords={currentMeta.keywords}
+        ogImage={isDoctorRoute && matchedDoctor?.photo ? `${url}${matchedDoctor.photo.endsWith('.png') ? matchedDoctor.photo.replace('.png', '.webp') : matchedDoctor.photo}` : undefined}
+      />
+      {schemas.map((schema, index) => (
+        <StructuredData key={index} schema={schema} />
+      ))}
+    </>
+  );
+};
+export default SEOManager;

@@ -5,7 +5,7 @@ import { Section } from '../components/Section';
 import { Button } from '../components/Button';
 import { FaqAccordion } from '../components/FaqAccordion';
 import { SPECIALTIES, EXAMS, CONTACT_INFO, FAQS, DOCTORS } from '../constants';
-import fachadaImg from '../imagens/fachada.png';
+const fachadaImg = '/imagens/fachada.webp';
 
 // Motion variants for premium staggered animations
 const containerVariants = {
@@ -47,8 +47,12 @@ export const Home: React.FC = () => {
           <div className="lg:hidden w-full h-[240px] sm:h-[340px] relative overflow-hidden">
             <img
               src={fachadaImg}
-              alt="Fachada do Centro Médico da Bahia"
+              alt="Fachada da clínica Centro Médico da Bahia em Jussara"
               className="w-full h-full object-cover"
+              fetchPriority="high"
+              loading="eager"
+              width="800"
+              height="340"
             />
           </div>
 
@@ -158,8 +162,12 @@ export const Home: React.FC = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.5, ease: 'easeOut' }}
             src={fachadaImg}
-            alt="Fachada do Centro Médico da Bahia"
+            alt="Fachada da clínica Centro Médico da Bahia em Jussara"
             className="w-full h-full object-cover transition-transform duration-[3000ms] ease-out group-hover/hero:scale-105"
+            fetchPriority="high"
+            loading="eager"
+            width="880"
+            height="500"
           />
         </div>
       </div>
@@ -173,8 +181,8 @@ export const Home: React.FC = () => {
               <Clock className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="font-bold text-xs sm:text-sm text-slate-800 leading-snug">Atendimento ágil</h4>
-              <p className="text-[10px] sm:text-xs text-slate-500 mt-0.5 leading-normal">Mais praticidade para sua rotina.</p>
+              <span className="block font-bold text-xs sm:text-sm text-slate-800 leading-snug">Atendimento ágil</span>
+              <p className="text-[10px] sm:text-xs text-slate-600 mt-0.5 leading-normal">Mais praticidade para sua rotina.</p>
             </div>
           </div>
 
@@ -184,8 +192,8 @@ export const Home: React.FC = () => {
               <Users className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="font-bold text-xs sm:text-sm text-slate-800 leading-snug">Equipe qualificada</h4>
-              <p className="text-[10px] sm:text-xs text-slate-500 mt-0.5 leading-normal">Profissionais experientes e atenciosos.</p>
+              <span className="block font-bold text-xs sm:text-sm text-slate-800 leading-snug">Equipe qualificada</span>
+              <p className="text-[10px] sm:text-xs text-slate-600 mt-0.5 leading-normal">Profissionais experientes e atenciosos.</p>
             </div>
           </div>
 
@@ -195,8 +203,8 @@ export const Home: React.FC = () => {
               <Heart className="w-5 h-5 text-red-500" />
             </div>
             <div>
-              <h4 className="font-bold text-xs sm:text-sm text-slate-800 leading-snug">Estrutura completa</h4>
-              <p className="text-[10px] sm:text-xs text-slate-500 mt-0.5 leading-normal">Tecnologia moderna para melhor atendimento.</p>
+              <span className="block font-bold text-xs sm:text-sm text-slate-800 leading-snug">Estrutura completa</span>
+              <p className="text-[10px] sm:text-xs text-slate-600 mt-0.5 leading-normal">Tecnologia moderna para melhor atendimento.</p>
             </div>
           </div>
 
@@ -206,8 +214,8 @@ export const Home: React.FC = () => {
               <MapPin className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="font-bold text-xs sm:text-sm text-slate-800 leading-snug">Localização</h4>
-              <p className="text-[10px] sm:text-xs text-slate-500 mt-0.5 leading-normal">No coração da Bahia, fácil acesso para você.</p>
+              <span className="block font-bold text-xs sm:text-sm text-slate-800 leading-snug">Localização</span>
+              <p className="text-[10px] sm:text-xs text-slate-600 mt-0.5 leading-normal">No coração da Bahia, fácil acesso para você.</p>
             </div>
           </div>
         </div>
@@ -235,7 +243,7 @@ export const Home: React.FC = () => {
             <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
               Nosso Corpo Clínico
             </h2>
-            <p className="mt-3 text-slate-500 text-base sm:text-lg max-w-xl mx-auto">
+            <p className="mt-3 text-slate-600 text-base sm:text-lg max-w-xl mx-auto">
               Médicos especializados e dedicados ao seu bem-estar, com atendimento humanizado.
             </p>
           </motion.div>
@@ -263,10 +271,13 @@ export const Home: React.FC = () => {
                   <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-white shadow-xl flex-shrink-0 mb-3 bg-slate-100">
                     {doctor.photo ? (
                       <img
-                        src={doctor.photo}
-                        alt={doctor.name}
+                        src={doctor.photo.endsWith('.png') ? doctor.photo.replace('.png', '.webp') : doctor.photo}
+                        alt={`Foto de ${doctor.name} - ${doctor.specialty} no Centro Médico da Bahia`}
                         className="w-full h-full object-cover"
                         style={{ objectPosition: doctor.photoPosition ?? 'center 25%' }}
+                        loading="lazy"
+                        width="112"
+                        height="112"
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-[#0a376c] text-white text-2xl font-black">
@@ -319,7 +330,7 @@ export const Home: React.FC = () => {
             <h2 className="text-3xl sm:text-4xl font-black text-slate-900 mb-3 tracking-tight">
               Exames e Procedimentos
             </h2>
-            <p className="text-slate-500 text-sm max-w-xl mx-auto">
+            <p className="text-slate-600 text-sm max-w-xl mx-auto">
               Estrutura completa com equipamentos modernos, atendimento humanizado e resultados confiáveis para cuidar do seu bem-estar.
             </p>
           </motion.div>
@@ -341,7 +352,7 @@ export const Home: React.FC = () => {
                   <exam.icon className="w-5 h-5 text-[#0a376c]" />
                 </div>
                 <h3 className="text-sm font-black text-slate-800 mb-1 leading-snug">{exam.title}</h3>
-                <p className="text-xs text-slate-500 leading-relaxed">{exam.description}</p>
+                <p className="text-xs text-slate-600 leading-relaxed">{exam.description}</p>
               </div>
             ))}
           </motion.div>
@@ -409,7 +420,7 @@ export const Home: React.FC = () => {
       <Section background="gray">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">Perguntas Frequentes</h2>
-          <p className="mt-4 text-xl text-slate-500">Tire suas dúvidas de forma rápida.</p>
+          <p className="mt-4 text-xl text-slate-600">Tire suas dúvidas de forma rápida.</p>
         </div>
         <FaqAccordion items={FAQS} />
       </Section>

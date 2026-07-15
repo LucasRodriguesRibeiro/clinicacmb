@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { CalendarCheck, Menu, X } from 'lucide-react';
 import { CONTACT_INFO } from '../constants';
 import { Logo } from './Logo';
 
 export const Navbar: React.FC = () => {
-  const [activeItem, setActiveItem] = useState('Início');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { pathname } = useLocation();
 
   const whatsappUrl = `https://wa.me/55${CONTACT_INFO.whatsapp.replace(/\D/g, '')}?text=Olá!%20Gostaria%20de%20agendar%20uma%20consulta.`;
 
   const navItems = [
-    { label: 'Início', href: '#inicio' },
-    { label: 'Corpo Clínico', href: '#corpo-clinico' },
-    { label: 'Exames', href: '#exames' },
-    { label: 'Contato', href: '#contato' }
+    { label: 'Início', href: '/' },
+    { label: 'Corpo Clínico', href: '/corpo-clinico' },
+    { label: 'Exames', href: '/exames' },
+    { label: 'Contato', href: '/contato' }
   ];
 
   return (
@@ -22,29 +23,28 @@ export const Navbar: React.FC = () => {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex items-center">
-            <a href="#" className="flex-shrink-0 flex items-center" onClick={() => setActiveItem('Início')}>
+            <Link to="/" className="flex-shrink-0 flex items-center" aria-label="Centro Médico da Bahia - Voltar ao início">
               <Logo className="h-12 w-auto" />
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center space-x-6 lg:space-x-8 h-full">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.label}
-                href={item.href}
-                onClick={() => setActiveItem(item.label)}
+                to={item.href}
                 className={`relative flex items-center h-full text-sm font-semibold transition-colors duration-200 hover:text-primary-600 ${
-                  activeItem === item.label
+                  pathname === item.href
                     ? 'text-primary-600'
                     : 'text-slate-600'
                 }`}
               >
                 {item.label}
-                {activeItem === item.label && (
+                {pathname === item.href && (
                   <span className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#0a376c] rounded-full" />
                 )}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -66,7 +66,7 @@ export const Navbar: React.FC = () => {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="text-slate-600 hover:text-primary-600 focus:outline-none p-2"
-              aria-label="Toggle menu"
+              aria-label="Alternar menu"
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -78,21 +78,20 @@ export const Navbar: React.FC = () => {
       {isMobileMenuOpen && (
         <div className="md:hidden bg-white border-b border-slate-100 px-4 pt-2 pb-6 space-y-3 transition-all duration-300">
           {navItems.map((item) => (
-            <a
+            <Link
               key={item.label}
-              href={item.href}
+              to={item.href}
               onClick={() => {
-                setActiveItem(item.label);
                 setIsMobileMenuOpen(false);
               }}
               className={`block py-2 text-base font-semibold border-l-4 pl-3 ${
-                activeItem === item.label
+                pathname === item.href
                   ? 'border-[#0a376c] text-primary-600 bg-primary-50/30'
                   : 'border-transparent text-slate-600 hover:bg-slate-50'
               }`}
             >
               {item.label}
-            </a>
+            </Link>
           ))}
           <div className="pt-4">
             <a

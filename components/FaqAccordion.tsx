@@ -21,8 +21,11 @@ export const FaqAccordion: React.FC<FaqAccordionProps> = ({ items }) => {
           className="border border-slate-200 rounded-lg bg-white overflow-hidden"
         >
           <button
-            className="w-full flex justify-between items-center p-4 text-left focus:outline-none hover:bg-slate-50 transition-colors"
+            id={`faq-btn-${index}`}
+            className="w-full flex justify-between items-center p-4 text-left focus:outline-none hover:bg-slate-50 focus-visible:ring-2 focus-visible:ring-primary-500 transition-colors"
             onClick={() => toggle(index)}
+            aria-expanded={openIndex === index}
+            aria-controls={`faq-panel-${index}`}
           >
             <span className="font-medium text-slate-800">{item.question}</span>
             {openIndex === index ? (
@@ -33,7 +36,12 @@ export const FaqAccordion: React.FC<FaqAccordionProps> = ({ items }) => {
           </button>
           
           {openIndex === index && (
-            <div className="p-4 pt-0 text-slate-600 bg-slate-50 border-t border-slate-100">
+            <div 
+              id={`faq-panel-${index}`}
+              role="region"
+              aria-labelledby={`faq-btn-${index}`}
+              className="p-4 pt-0 text-slate-600 bg-slate-50 border-t border-slate-100"
+            >
               {item.answer}
             </div>
           )}

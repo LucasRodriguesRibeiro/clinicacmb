@@ -17,7 +17,7 @@ export const Footer: React.FC = () => {
             <p className="text-sm leading-relaxed mb-6 text-slate-400 max-w-md">
               Referência em atendimento médico na Bahia. Agilidade, confiança e profissionais qualificados para cuidar da sua saúde e da sua família.
             </p>
-            <div className="text-xs text-slate-500">
+            <div className="text-xs text-slate-400">
               <p>CNPJ: 09.157.211/0002-98</p>
             </div>
           </div>
@@ -27,26 +27,26 @@ export const Footer: React.FC = () => {
             <h3 className="text-white font-semibold mb-4 uppercase tracking-wider text-sm">Contato</h3>
             <ul className="space-y-4 text-sm flex flex-col items-start">
               <li className="flex items-start text-left">
-                <MapPin className="w-5 h-5 mr-3 text-primary-500 flex-shrink-0" />
+                <MapPin className="w-5 h-5 mr-3 text-primary-300 flex-shrink-0" />
                 <span>{CONTACT_INFO.address}</span>
               </li>
               <li className="flex items-center text-left">
-                <Phone className="w-5 h-5 mr-3 text-primary-500 flex-shrink-0" />
+                <Phone className="w-5 h-5 mr-3 text-primary-300 flex-shrink-0" />
                 <span>{CONTACT_INFO.phone}</span>
               </li>
               <li className="flex items-center text-left">
-                <Mail className="w-5 h-5 mr-3 text-primary-500 flex-shrink-0" />
+                <Mail className="w-5 h-5 mr-3 text-primary-300 flex-shrink-0" />
                 <span>{CONTACT_INFO.email}</span>
               </li>
               <li className="flex items-start text-left">
-                <Clock className="w-5 h-5 mr-3 text-primary-500 flex-shrink-0" />
+                <Clock className="w-5 h-5 mr-3 text-primary-300 flex-shrink-0" />
                 <span>{CONTACT_INFO.hours}</span>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-slate-800 mt-12 pt-8 text-center text-xs text-slate-500">
+        <div className="border-t border-slate-800 mt-12 pt-8 text-center text-xs text-slate-400">
           <p>&copy; {new Date().getFullYear()} CMB - Centro Médico da Bahia. Todos os direitos reservados.</p>
         </div>
       </div>
