@@ -1,252 +1,407 @@
 import React from 'react';
-import { CalendarCheck, ShieldCheck, Clock, ArrowRight, Activity, Stethoscope, FileText, Syringe, FlaskConical, Waves } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { CalendarCheck, ShieldCheck, Clock, ArrowRight, Activity, Stethoscope, FileText, Syringe, FlaskConical, Waves, Users, Heart, MapPin, BadgeCheck, ChevronRight } from 'lucide-react';
 import { Section } from '../components/Section';
 import { Button } from '../components/Button';
 import { FaqAccordion } from '../components/FaqAccordion';
-import { SPECIALTIES, EXAMS, CONTACT_INFO, FAQS } from '../constants';
+import { SPECIALTIES, EXAMS, CONTACT_INFO, FAQS, DOCTORS } from '../constants';
+import fachadaImg from '../imagens/fachada.png';
+
+// Motion variants for premium staggered animations
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 25 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.65,
+      ease: [0.16, 1, 0.3, 1] // Custom easeOutExpo
+    }
+  }
+};
 
 export const Home: React.FC = () => {
   return (
     <div className="flex flex-col overflow-x-hidden w-full">
       {/* HERO SECTION */}
-      <div className="relative bg-gradient-to-b from-primary-600 to-primary-800 overflow-hidden py-12 lg:py-20 text-white">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10 bg-pattern-dots pointer-events-none"></div>
-        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-primary-400 blur-3xl opacity-20 animate-pulse-slow"></div>
-        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-blue-400 blur-3xl opacity-20"></div>
+      <div id="inicio" className="group/hero relative lg:min-h-[500px] flex flex-col lg:flex-row lg:items-center bg-gradient-to-br from-white via-slate-50 to-blue-50/20 overflow-hidden pt-0 pb-8 lg:pt-8 lg:pb-16 border-b border-slate-100">
+        
+        {/* Background Patterns */}
+        <div className="absolute inset-0 opacity-[0.03] bg-pattern-dots pointer-events-none"></div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-blue-100/50 blur-3xl opacity-30 pointer-events-none"></div>
 
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-
-          {/* Badge */}
-          <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-blue-50 text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-4 sm:mb-6 backdrop-blur-sm">
-            <span className="w-2 h-2 bg-blue-300 rounded-full mr-2 animate-pulse"></span>
-            EXCELÊNCIA EM MEDICINA
+        <div className="max-w-7xl mx-auto lg:px-8 w-full relative z-20">
+          
+          {/* Top Full-width Facade Image on Mobile */}
+          <div className="lg:hidden w-full h-[240px] sm:h-[340px] relative overflow-hidden">
+            <img
+              src={fachadaImg}
+              alt="Fachada do Centro Médico da Bahia"
+              className="w-full h-full object-cover"
+            />
           </div>
 
-          {/* Headline */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight mb-3 sm:mb-4 leading-tight drop-shadow-md break-words">
-            Sua saúde em <span className="text-blue-200">primeiro lugar</span>
-          </h1>
+          {/* Overlapping Content Card on Mobile */}
+          <div className="bg-white rounded-t-[32px] -mt-6 pt-8 pb-4 px-4 sm:px-6 relative z-20 lg:bg-transparent lg:rounded-none lg:-mt-0 lg:p-0">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              
+              {/* Left Content Column */}
+              <motion.div 
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                className="lg:col-span-7 flex flex-col items-start text-left"
+              >
+                {/* Badge */}
+                <motion.div 
+                  variants={itemVariants}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-50/80 border border-blue-100/50 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#0a376c] mb-6 shadow-sm"
+                >
+                  <ShieldCheck className="w-3.5 h-3.5 text-primary-500" />
+                  EXCELÊNCIA EM MEDICINA
+                </motion.div>
 
-          {/* Subheadline */}
-          <p className="text-sm sm:text-lg text-blue-50 mb-6 sm:mb-8 max-w-2xl mx-auto font-light leading-relaxed px-2">
-            Agende consultas e exames com agilidade e confiança. Atendimento humanizado e estrutura completa no coração da Bahia.
-          </p>
+                {/* Headline */}
+                <motion.h1 
+                  variants={itemVariants}
+                  className="text-4xl sm:text-5xl lg:text-[3.5rem] font-black tracking-tight text-slate-900 leading-tight mb-4"
+                >
+                  Sua saúde em <br className="hidden sm:inline" />
+                  <span className="text-[#0a376c]">primeiro</span> lugar
+                </motion.h1>
 
-          {/* Benefits Grid - Horizontal & Compact */}
-          <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-8 sm:mb-10 max-w-4xl mx-auto w-full">
-            <div className="bg-white/10 backdrop-blur-md rounded-xl p-1.5 sm:p-4 border border-white/5 flex flex-col items-center justify-center text-center hover:bg-white/20 transition-colors">
-              <Stethoscope className="w-5 h-5 sm:w-6 sm:h-6 text-blue-300 mb-1 sm:mb-2" />
-              <span className="font-bold text-[10px] sm:text-sm leading-tight break-words px-1">Especialidades</span>
-              <span className="hidden sm:block text-xs text-blue-100 opacity-80 mt-1">Clínico, pediatria e mais</span>
-            </div>
-            <div className="bg-white/10 backdrop-blur-md rounded-xl p-1.5 sm:p-4 border border-white/5 flex flex-col items-center justify-center text-center hover:bg-white/20 transition-colors">
-              <Activity className="w-5 h-5 sm:w-6 sm:h-6 text-blue-300 mb-1 sm:mb-2" />
-              <span className="font-bold text-[10px] sm:text-sm leading-tight break-words px-1">Exames</span>
-              <span className="hidden sm:block text-xs text-blue-100 opacity-80 mt-1">Laboratório e Imagem</span>
-            </div>
-            <div className="bg-white/10 backdrop-blur-md rounded-xl p-1.5 sm:p-4 border border-white/5 flex flex-col items-center justify-center text-center hover:bg-white/20 transition-colors">
-              <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6 text-blue-300 mb-1 sm:mb-2" />
-              <span className="font-bold text-[10px] sm:text-sm leading-tight text-center break-words px-1">Atendimento</span>
-              <span className="hidden sm:block text-xs text-blue-100 opacity-80 mt-1">Cuidado em cada etapa</span>
+                {/* Subheadline */}
+                <motion.p 
+                  variants={itemVariants}
+                  className="text-base sm:text-lg text-slate-600 font-normal mb-8 max-w-xl leading-relaxed"
+                >
+                  Agende consultas e exames com agilidade e confiança. Atendimento humanizado e estrutura completa no coração da Bahia.
+                </motion.p>
+
+                {/* Buttons */}
+                <motion.div 
+                  variants={itemVariants}
+                  className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-2 w-full sm:w-auto"
+                >
+                  <a
+                    href={`https://wa.me/55${CONTACT_INFO.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent("Olá, gostaria de agendar uma consulta.")}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-full sm:w-auto"
+                  >
+                    <button className="w-full bg-[#0a376c] hover:bg-[#002241] text-white font-bold px-8 py-3.5 rounded-xl shadow-lg shadow-blue-900/10 flex items-center justify-center gap-2 transition-all">
+                      <CalendarCheck className="w-5 h-5" />
+                      Agendar consulta
+                    </button>
+                  </a>
+                  <a
+                    href={`https://wa.me/55${CONTACT_INFO.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent("Olá, vim pelo site da Clínica CMB.")}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-full sm:w-auto"
+                  >
+                    <button className="w-full bg-white hover:bg-slate-50 text-[#15a34a] border border-slate-200 font-bold px-8 py-3.5 rounded-xl shadow-sm flex items-center justify-center gap-2 transition-all">
+                      <svg className="w-5 h-5 text-[#15a34a]" fill="none" viewBox="0 0 24 24">
+                        <path
+                          d="M12 2C6.48 2 2 6.48 2 12c0 2.17.61 4.2 1.66 5.92L2 22l4.19-1.08C7.87 21.57 9.87 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M16.4 14.8c-.3-.2-1.7-.9-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.8-.7-1.4-1.6-1.6-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.5-.5.2-.2.2-.3.3-.5.1-.2 0-.4-.1-.5-.1-.2-.9-2.2-1.2-2.9-.3-.7-.6-.6-.8-.6h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.8.7.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.1-1.4-.1-.2-.4-.3-.7-.4z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                      Falar no WhatsApp
+                    </button>
+                  </a>
+                </motion.div>
+
+
+              </motion.div>
+
+              {/* Right Column (only visible on desktop / fallback) */}
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, ease: 'easeOut', delay: 0.25 }}
+                className="lg:col-span-5 lg:hidden relative w-full h-[250px] sm:h-[350px] rounded-2xl overflow-hidden shadow-md border border-slate-100 hidden"
+              >
+                <img
+                  src={fachadaImg}
+                  alt="Fachada do Centro Médico da Bahia"
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
             </div>
           </div>
+        </div>
 
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
-            <a
-              href={`https://wa.me/55${CONTACT_INFO.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent("Olá, gostaria de agendar uma consulta.")}`}
-              target="_blank"
-              rel="noreferrer"
-              className="w-full sm:w-auto"
-            >
-              <Button className="w-full h-12 text-sm sm:text-base px-8 bg-white text-primary-700 hover:bg-blue-50 border-transparent shadow-lg font-bold">
-                Agendar consulta
-              </Button>
-            </a>
-            <a
-              href={`https://wa.me/55${CONTACT_INFO.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent("Olá, vim pelo site da Clínica CMB.")}`}
-              target="_blank"
-              rel="noreferrer"
-              className="w-full sm:w-auto"
-            >
-              <Button variant="whatsapp" className="w-full h-12 text-sm sm:text-base px-8 shadow-lg bg-[#25D366] hover:bg-[#128C7E] border-transparent">
-                Falar no WhatsApp
-              </Button>
-            </a>
-          </div>
-
-          {/* Microcopy */}
-          <p className="mt-6 text-[10px] sm:text-xs font-medium text-blue-200/80 uppercase tracking-wide flex items-center justify-center gap-2">
-            <Clock className="w-3 h-3" />
-            Resposta rápida • Atendimento local
-          </p>
+        {/* Absolute Image for Desktop */}
+        <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-[46%] h-full z-10 overflow-hidden">
+          <div className="absolute inset-y-0 left-0 w-48 lg:w-64 bg-gradient-to-r from-white via-white/80 to-transparent z-20 pointer-events-none"></div>
+          <motion.img
+            initial={{ opacity: 0, scale: 1.03 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, ease: 'easeOut' }}
+            src={fachadaImg}
+            alt="Fachada do Centro Médico da Bahia"
+            className="w-full h-full object-cover transition-transform duration-[3000ms] ease-out group-hover/hero:scale-105"
+          />
         </div>
       </div>
 
-      {/* O QUE VOCÊ ENCONTRA NA CMB */}
-      <Section background="white" className="relative -mt-16 z-20 pt-0">
-        <div className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-slate-100 p-5 sm:p-8 md:p-12">
-          <div className="text-center mb-10 sm:mb-12">
-            <h2 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">Tudo para sua saúde</h2>
-            <p className="mt-4 text-xl text-slate-500">Completa infraestrutura para cuidar de você.</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="group bg-white p-8 rounded-2xl border border-slate-100 text-center hover:shadow-glow transition-all duration-300 transform hover:-translate-y-2">
-              <div className="w-16 h-16 bg-blue-50 text-primary-600 rounded-2xl rotate-3 group-hover:rotate-0 transition-transform flex items-center justify-center mx-auto mb-6">
-                <Stethoscope className="w-8 h-8" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">Consultas</h3>
-              <p className="text-sm text-slate-600">Especialistas prontos para te ouvir e cuidar.</p>
+      {/* OVERLAPPING HIGHLIGHT CARDS */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 lg:-mt-20 relative z-30">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+          {/* Card 1 */}
+          <div className="bg-white border border-slate-100/80 shadow-sm hover:shadow-md p-3 sm:p-5 flex items-center gap-3 sm:gap-4 rounded-2xl cursor-pointer hover:-translate-y-1 transition-all duration-300">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-blue-100 flex items-center justify-center text-[#0a376c] bg-blue-50/50 flex-shrink-0 shadow-sm">
+              <Clock className="w-5 h-5" />
             </div>
-            <div className="group bg-white p-8 rounded-2xl border border-slate-100 text-center hover:shadow-glow transition-all duration-300 transform hover:-translate-y-2">
-              <div className="w-16 h-16 bg-blue-50 text-primary-600 rounded-2xl -rotate-3 group-hover:rotate-0 transition-transform flex items-center justify-center mx-auto mb-6">
-                <Activity className="w-8 h-8" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">Exames</h3>
-              <p className="text-sm text-slate-600">Laboratório e imagem com precisão digital.</p>
-            </div>
-            <div className="group bg-white p-8 rounded-2xl border border-slate-100 text-center hover:shadow-glow transition-all duration-300 transform hover:-translate-y-2">
-              <div className="w-16 h-16 bg-blue-50 text-primary-600 rounded-2xl rotate-3 group-hover:rotate-0 transition-transform flex items-center justify-center mx-auto mb-6">
-                <FileText className="w-8 h-8" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">Check-ups</h3>
-              <p className="text-sm text-slate-600">Prevenção completa para uma vida longa.</p>
+            <div>
+              <h4 className="font-bold text-xs sm:text-sm text-slate-800 leading-snug">Atendimento ágil</h4>
+              <p className="text-[10px] sm:text-xs text-slate-500 mt-0.5 leading-normal">Mais praticidade para sua rotina.</p>
             </div>
           </div>
-        </div>
-      </Section>
 
-      {/* SPECIALTIES PREVIEW */}
-      <Section background="gray">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">Nossas Especialidades</h2>
-          <p className="mt-4 text-xl text-slate-500">Médicos especialistas prontos para te atender.</p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {SPECIALTIES.slice(0, 8).map((spec) => (
-            <div key={spec.id} className="group relative bg-white border border-slate-200 rounded-lg p-6 hover:shadow-lg transition-all hover:-translate-y-1">
-              <div className="flex items-center justify-between mb-4">
-                <spec.icon className="w-8 h-8 text-primary-600" />
-              </div>
-              <h3 className="text-lg font-medium text-slate-900 group-hover:text-primary-600 transition-colors">
-                {spec.title}
-              </h3>
-              <p className="mt-2 text-sm text-slate-500">
-                {spec.description}
-              </p>
+          {/* Card 2 */}
+          <div className="bg-white border border-slate-100/80 shadow-sm hover:shadow-md p-3 sm:p-5 flex items-center gap-3 sm:gap-4 rounded-2xl cursor-pointer hover:-translate-y-1 transition-all duration-300">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-blue-100 flex items-center justify-center text-[#0a376c] bg-blue-50/50 flex-shrink-0 shadow-sm">
+              <Users className="w-5 h-5" />
             </div>
-          ))}
+            <div>
+              <h4 className="font-bold text-xs sm:text-sm text-slate-800 leading-snug">Equipe qualificada</h4>
+              <p className="text-[10px] sm:text-xs text-slate-500 mt-0.5 leading-normal">Profissionais experientes e atenciosos.</p>
+            </div>
+          </div>
+
+          {/* Card 3 */}
+          <div className="bg-white border border-slate-100/80 shadow-sm hover:shadow-md p-3 sm:p-5 flex items-center gap-3 sm:gap-4 rounded-2xl cursor-pointer hover:-translate-y-1 transition-all duration-300">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-red-100 flex items-center justify-center text-[#D32F2F] bg-red-50/50 flex-shrink-0 shadow-sm">
+              <Heart className="w-5 h-5 text-red-500" />
+            </div>
+            <div>
+              <h4 className="font-bold text-xs sm:text-sm text-slate-800 leading-snug">Estrutura completa</h4>
+              <p className="text-[10px] sm:text-xs text-slate-500 mt-0.5 leading-normal">Tecnologia moderna para melhor atendimento.</p>
+            </div>
+          </div>
+
+          {/* Card 4 */}
+          <div className="bg-white border border-slate-100/80 shadow-sm hover:shadow-md p-3 sm:p-5 flex items-center gap-3 sm:gap-4 rounded-2xl cursor-pointer hover:-translate-y-1 transition-all duration-300">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-blue-100 flex items-center justify-center text-[#0a376c] bg-blue-50/50 flex-shrink-0 shadow-sm">
+              <MapPin className="w-5 h-5" />
+            </div>
+            <div>
+              <h4 className="font-bold text-xs sm:text-sm text-slate-800 leading-snug">Localização</h4>
+              <p className="text-[10px] sm:text-xs text-slate-500 mt-0.5 leading-normal">No coração da Bahia, fácil acesso para você.</p>
+            </div>
+          </div>
         </div>
+      </div>
 
-      </Section>
+      {/* CORPO CLÍNICO */}
+      <section id="corpo-clinico" className="py-16 sm:py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
+        {/* Decorative background blobs */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-40 pointer-events-none"></div>
 
-      {/* EXAMS PREVIEW */}
-      <Section background="blue">
-        <div className="lg:flex lg:items-center lg:justify-between">
-          <div className="lg:w-1/2 text-white">
-            <h2 className="text-3xl font-extrabold sm:text-4xl mb-4 text-white">
-              Exames Laboratoriais e de Imagem
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center mb-12"
+          >
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#0a376c] mb-4">
+              <BadgeCheck className="w-3.5 h-3.5" />
+              Profissionais habilitados
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+              Nosso Corpo Clínico
             </h2>
-            <p className="text-lg text-primary-100 mb-8">
-              Realize seus exames com equipamentos modernos, conforto e receba resultados rápidos.
+            <p className="mt-3 text-slate-500 text-base sm:text-lg max-w-xl mx-auto">
+              Médicos especializados e dedicados ao seu bem-estar, com atendimento humanizado.
             </p>
-            <ul className="space-y-4 mb-8">
-              {EXAMS.map((exam) => (
-                <li key={exam.id} className="flex items-start">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-white text-primary-600 shadow-sm">
-                      <exam.icon className="w-5 h-5" />
-                    </div>
+          </motion.div>
+
+          {/* Doctor Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {DOCTORS.map((doctor, index) => (
+              <motion.div
+                key={doctor.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
+                className="group bg-white rounded-2xl border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col"
+              >
+                {/* Gradient header background */}
+                <div className="bg-gradient-to-br from-[#0a376c] to-[#0e4d96] pt-8 pb-14 flex justify-center relative overflow-hidden">
+                  {/* Subtle decorative circles */}
+                  <div className="absolute -top-6 -right-6 w-24 h-24 bg-white/5 rounded-full"></div>
+                  <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-white/5 rounded-full"></div>
+                </div>
+
+                {/* Avatar — overlaps the gradient header */}
+                <div className="flex flex-col items-center -mt-14 px-6 flex-grow relative z-10">
+                  <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-white shadow-xl flex-shrink-0 mb-3 bg-slate-100">
+                    {doctor.photo ? (
+                      <img
+                        src={doctor.photo}
+                        alt={doctor.name}
+                        className="w-full h-full object-cover"
+                        style={{ objectPosition: doctor.photoPosition ?? 'center 25%' }}
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-[#0a376c] text-white text-2xl font-black">
+                        {doctor.initials}
+                      </div>
+                    )}
                   </div>
-                  <div className="ml-4">
-                    <p className="text-lg font-medium text-white">{exam.title}</p>
-                    <p className="text-primary-200 text-sm">{exam.description}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-6 flex justify-center">
-              <a href={`https://wa.me/55${CONTACT_INFO.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent('Olá, gostaria de agendar um exame.')}`} target="_blank" rel="noopener noreferrer" className="inline-block">
-                <Button variant="primary" className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-md font-semibold shadow-md">
-                  Agendar Exame
-                </Button>
-              </a>
-            </div>
 
-          </div>
-          <div className="mt-12 lg:mt-0 lg:w-1/2 lg:pl-10 relative">
-            {/* Abstract Geometric Composition */}
-            <div className="relative h-auto py-12 lg:h-[450px] lg:py-0 w-full rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden flex items-center justify-center group">
+                  {/* Specialty badge */}
+                  <span className="inline-block px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-3 text-[#0a376c] bg-blue-50 border border-blue-100">
+                    {doctor.specialty}
+                  </span>
 
-              {/* Background Gradients */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-blue-400 rounded-full mix-blend-overlay filter blur-3xl opacity-20 animate-pulse-slow"></div>
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary-400 rounded-full mix-blend-overlay filter blur-3xl opacity-20"></div>
+                  {/* Name */}
+                  <h3 className="font-black text-base text-slate-900 text-center leading-tight mb-1">
+                    {doctor.name}
+                  </h3>
 
-              {/* Geometric Lines */}
-              <div className="absolute inset-0 opacity-10">
-                <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                  <path d="M0 100 Q 50 0 100 100" stroke="white" strokeWidth="0.5" fill="none" />
-                  <circle cx="50" cy="50" r="30" stroke="white" strokeWidth="0.5" fill="none" />
-                  <circle cx="20" cy="20" r="10" stroke="white" strokeWidth="0.5" fill="none" />
-                  <circle cx="80" cy="80" r="15" stroke="white" strokeWidth="0.5" fill="none" />
-                </svg>
-              </div>
-
-              {/* Icons Grid */}
-              <div className="relative z-10 grid grid-cols-2 gap-4 sm:gap-6 p-4 sm:p-6 w-full max-w-md">
-
-                {/* ECG Icon */}
-                <div className="aspect-square flex flex-col items-center justify-center p-4 bg-white/10 rounded-2xl backdrop-blur-md border border-white/10 shadow-lg transform hover:scale-105 transition-all duration-300">
-                  <Activity className="w-12 h-12 lg:w-16 lg:h-16 text-white/90 mb-3" strokeWidth={1.5} />
-                  <span className="text-[10px] lg:text-xs font-bold text-blue-50 uppercase tracking-widest">Cardiologia</span>
                 </div>
 
-                {/* Lab Icon */}
-                <div className="aspect-square flex flex-col items-center justify-center p-4 bg-white/10 rounded-2xl backdrop-blur-md border border-white/10 shadow-lg transform hover:scale-105 transition-all duration-300 translate-y-8">
-                  <FlaskConical className="w-12 h-12 lg:w-16 lg:h-16 text-white/90 mb-3" strokeWidth={1.5} />
-                  <span className="text-[10px] lg:text-xs font-bold text-blue-50 uppercase tracking-widest">Laboratório</span>
+                {/* Book button */}
+                <div className="px-6 pb-6">
+                  <a
+                    href={`https://wa.me/55${CONTACT_INFO.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(`Olá, gostaria de agendar uma consulta com ${doctor.name}.`)}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block w-full text-center text-xs font-bold py-2.5 rounded-xl text-white bg-[#0a376c] hover:bg-[#062a55] transition-all hover:-translate-y-0.5 shadow-md"
+                  >
+                    Agendar consulta
+                  </a>
                 </div>
-
-                {/* Ultrasound Icon (Centered below) */}
-                <div className="col-span-2 aspect-video flex flex-col items-center justify-center p-4 bg-white/10 rounded-2xl backdrop-blur-md border border-white/10 shadow-lg transform hover:scale-105 transition-all duration-300 w-3/4 mx-auto -mt-4">
-                  <Waves className="w-12 h-12 lg:w-16 lg:h-16 text-white/90 mb-3" strokeWidth={1.5} />
-                  <span className="text-[10px] lg:text-xs font-bold text-blue-50 uppercase tracking-widest">Ultrassonografia</span>
-                </div>
-              </div>
-            </div>
+              </motion.div>
+            ))}
           </div>
         </div>
-      </Section>
+      </section>
+
+      {/* EXAMES */}
+      <section id="exames" className="py-16 sm:py-24 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 mb-3 tracking-tight">
+              Exames e Procedimentos
+            </h2>
+            <p className="text-slate-500 text-sm max-w-xl mx-auto">
+              Estrutura completa com equipamentos modernos, atendimento humanizado e resultados confiáveis para cuidar do seu bem-estar.
+            </p>
+          </motion.div>
+
+          {/* Exams Grid (4 Columns) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
+          >
+            {EXAMS.map((exam) => (
+              <div
+                key={exam.id}
+                className="bg-white rounded-2xl p-6 border border-slate-100/80 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center sm:items-start sm:text-left"
+              >
+                <div className="w-10 h-10 rounded-xl bg-[#0a376c]/5 flex items-center justify-center mb-4 flex-shrink-0">
+                  <exam.icon className="w-5 h-5 text-[#0a376c]" />
+                </div>
+                <h3 className="text-sm font-black text-slate-800 mb-1 leading-snug">{exam.title}</h3>
+                <p className="text-xs text-slate-500 leading-relaxed">{exam.description}</p>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* CTA */}
+          <div className="text-center">
+            <a
+              href={`https://wa.me/55${CONTACT_INFO.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent('Olá, gostaria de agendar um exame.')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block"
+            >
+              <button className="bg-[#0a376c] hover:bg-[#062a55] text-white font-bold px-10 py-4 rounded-full shadow-lg transition-all hover:-translate-y-0.5 duration-200">
+                Agendar Exame
+              </button>
+            </a>
+          </div>
+
+        </div>
+      </section>
 
       {/* POR QUE ESCOLHER A CMB */}
-      <Section background="white">
+      <Section id="atendimento" background="blue">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">Por que escolher a CMB?</h2>
-          <p className="mt-4 text-xl text-slate-500">Compromisso com sua saúde e bem-estar.</p>
+          <h2 className="text-3xl font-black text-white sm:text-4xl tracking-tight">
+            Por que escolher a CMB?
+          </h2>
+          <p className="mt-4 text-lg text-blue-100">
+            Compromisso com sua saúde e bem-estar em cada detalhe.
+          </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-          <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-            <div className="w-12 h-12 bg-secondary-50 text-secondary-600 rounded-lg flex items-center justify-center mx-auto mb-4">
-              <ShieldCheck className="w-6 h-6" />
+          
+          {/* Card 1 */}
+          <div className="bg-white/10 backdrop-blur-md border border-white/10 p-8 rounded-2xl shadow-xl hover:bg-white/15 hover:-translate-y-1.5 transition-all duration-300">
+            <div className="w-14 h-14 bg-white/20 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-inner">
+              <ShieldCheck className="w-7 h-7" />
             </div>
-            <h3 className="text-xl font-bold text-slate-900 mb-2">Confiança Médica</h3>
-            <p className="text-slate-600">Corpo clínico altamente qualificado e humanizado.</p>
+            <h3 className="text-lg font-black text-white mb-2">Confiança Médica</h3>
+            <p className="text-sm text-blue-100 leading-relaxed">Corpo clínico altamente qualificado e atendimento verdadeiramente humanizado.</p>
           </div>
-          <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-            <div className="w-12 h-12 bg-secondary-50 text-secondary-600 rounded-lg flex items-center justify-center mx-auto mb-4">
-              <Clock className="w-6 h-6" />
+
+          {/* Card 2 */}
+          <div className="bg-white/10 backdrop-blur-md border border-white/10 p-8 rounded-2xl shadow-xl hover:bg-white/15 hover:-translate-y-1.5 transition-all duration-300">
+            <div className="w-14 h-14 bg-white/20 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-inner">
+              <Clock className="w-7 h-7" />
             </div>
-            <h3 className="text-xl font-bold text-slate-900 mb-2">Agilidade</h3>
-            <p className="text-slate-600">Pontualidade nas consultas e rapidez nos resultados.</p>
+            <h3 className="text-lg font-black text-white mb-2">Agilidade</h3>
+            <p className="text-sm text-blue-100 leading-relaxed">Pontualidade no atendimento às consultas e máxima rapidez na entrega de laudos.</p>
           </div>
-          <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-            <div className="w-12 h-12 bg-secondary-50 text-secondary-600 rounded-lg flex items-center justify-center mx-auto mb-4">
-              <CalendarCheck className="w-6 h-6" />
+
+          {/* Card 3 */}
+          <div className="bg-white/10 backdrop-blur-md border border-white/10 p-8 rounded-2xl shadow-xl hover:bg-white/15 hover:-translate-y-1.5 transition-all duration-300">
+            <div className="w-14 h-14 bg-white/20 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-inner">
+              <CalendarCheck className="w-7 h-7" />
             </div>
-            <h3 className="text-xl font-bold text-slate-900 mb-2">Fácil Acesso</h3>
-            <p className="text-slate-600">Localização privilegiada e agendamento simplificado.</p>
+            <h3 className="text-lg font-black text-white mb-2">Fácil Acesso</h3>
+            <p className="text-sm text-blue-100 leading-relaxed">Localização privilegiada no centro de Jussara e facilidade de agendamento digital.</p>
           </div>
+
         </div>
       </Section>
 
@@ -259,9 +414,8 @@ export const Home: React.FC = () => {
         <FaqAccordion items={FAQS} />
       </Section>
 
-
       {/* CTA STRIP */}
-      <div className="relative py-20 overflow-hidden">
+      <div id="contato" className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-brand"></div>
         <div className="absolute inset-0 bg-primary-900/90"></div>
         <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/medical-icons.png')]"></div>
@@ -290,6 +444,6 @@ export const Home: React.FC = () => {
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 };

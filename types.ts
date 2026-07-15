@@ -22,3 +22,15 @@ export interface ContactInfo {
   hours: string;
   email: string;
 }
+
+export interface Doctor {
+  id: string;
+  name: string;
+  specialty: string;
+  crm: string;
+  days: string;
+  initials: string;
+  color: string;           // Hex color for avatar accent
+  photo?: string;          // optional: path to actual photo
+  photoPosition?: string;  // optional: CSS object-position (e.g. 'center 10%')
+}

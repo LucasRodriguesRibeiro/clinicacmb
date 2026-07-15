@@ -10,8 +10,13 @@ import {
   Waves,
   Sparkles,
   AlignCenter,
+  Shield,
+  Eye,
+  Zap,
+  Scissors
 } from 'lucide-react';
-import { ServiceItem, FaqItem, ContactInfo } from './types';
+
+import { ServiceItem, FaqItem, ContactInfo, Doctor } from './types';
 
 export const CONTACT_INFO: ContactInfo = {
   phone: "(74) 99816-2793",
@@ -21,6 +26,75 @@ export const CONTACT_INFO: ContactInfo = {
   email: "contato@cmb.com.br"
 };
 
+export const DOCTORS: Doctor[] = [
+  {
+    id: 'dr-misterbrando',
+    name: 'Dr. Misterbrando',
+    specialty: 'Ortopedia',
+    crm: 'CRM-BA —',
+    days: 'A consultar',
+    initials: 'MB',
+    color: '#0891b2',
+    photo: '/profissionais/misterbrando.png',
+    photoPosition: 'center 30%',
+  },
+  {
+    id: 'dr-paulo-cesar',
+    name: 'Dr. Paulo Cesar',
+    specialty: 'Pediatra e Alergologista',
+    crm: 'CRM-BA —',
+    days: 'A consultar',
+    initials: 'PC',
+    color: '#059669',
+    photo: '/profissionais/dr-paulo.png',
+    photoPosition: 'center 25%',
+  },
+  {
+    id: 'dr-jose-edjevandio',
+    name: 'Dr. José Edjevandio',
+    specialty: 'Ginecologia e Ultrassonografia',
+    crm: 'CRM-BA —',
+    days: 'A consultar',
+    initials: 'JE',
+    color: '#7c3aed',
+    photo: '/profissionais/jose-edvando.png',
+    photoPosition: 'center 25%',
+  },
+  {
+    id: 'dra-josy-silva',
+    name: 'Dra. Josy Silva',
+    specialty: 'Ortodontia Especializada',
+    crm: 'CRM-BA —',
+    days: 'A consultar',
+    initials: 'JS',
+    color: '#db2777',
+    photo: '/profissionais/dra-josy.png',
+    photoPosition: 'center 30%',
+  },
+  {
+    id: 'dr-jair-mendes',
+    name: 'Dr. Jair Mendes',
+    specialty: 'Cirurgião-Dentista',
+    crm: 'CRM-BA —',
+    days: 'A consultar',
+    initials: 'JM',
+    color: '#0a376c',
+    photo: '/profissionais/jair-mendes.png',
+    photoPosition: 'center 25%',
+  },
+  {
+    id: 'dr-denivan-machado',
+    name: 'Dr. Denivan Machado',
+    specialty: 'Cardiologista e Clínico Geral',
+    crm: 'CRM-BA —',
+    days: 'A consultar',
+    initials: 'DM',
+    color: '#D32F2F',
+    photo: '/profissionais/denivan-machado.png',
+    photoPosition: 'center 30%',
+  },
+];
+
 
 
 
@@ -28,7 +102,7 @@ export const SPECIALTIES: ServiceItem[] = [
   {
     id: 'ortopedia',
     title: 'Ortopedista',
-    description: 'Cuidados com ossos, músculos e articulações para sua mobilidade.',
+    description: 'Cuidados com ossos, muscles e articulações para sua mobilidade.',
     icon: Bone
   },
   {
@@ -73,25 +147,50 @@ export const EXAMS: ServiceItem[] = [
   {
     id: 'ecg',
     title: 'Eletrocardiograma (ECG)',
-    description: 'Exame rápido para avaliar o ritmo e a saúde do coração.',
+    description: 'Avaliação rápida do ritmo e saúde do coração.',
     icon: Activity
   },
   {
     id: 'laboratorio',
     title: 'Exames Laboratoriais',
-    description: 'Hemograma, colesterol, glicemia e check-ups completos.',
+    description: 'Hemograma, glicemia, colesterol e check-ups.',
     icon: TestTube
   },
   {
     id: 'ultrassom',
     title: 'Ultrassonografias',
-    description: 'Geral, morfológica e com Doppler. Imagens de alta precisão.',
-    icon: Waves,
-    details: [
-      'Ultrassonografia Geral',
-      'Ultrassonografia Morfológica',
-      'Ultrassonografia com Doppler'
-    ]
+    description: 'Geral, morfológica e com Doppler colorido.',
+    icon: Waves
+  },
+  {
+    id: 'preventivo',
+    title: 'Preventivo (Papanicolau)',
+    description: 'Prevenção e rastreamento ginecológico essencial.',
+    icon: Shield
+  },
+  {
+    id: 'biopsia',
+    title: 'Biópsia de Colo Uterino',
+    description: 'Coleta de fragmento para análise de laboratório.',
+    icon: Scissors
+  },
+  {
+    id: 'diu',
+    title: 'Inserção de DIU',
+    description: 'Procedimento seguro de contracepção de longo prazo.',
+    icon: Flower
+  },
+  {
+    id: 'colposcopia',
+    title: 'Colposcopia',
+    description: 'Avaliação detalhada do colo do útero com ampliação.',
+    icon: Eye
+  },
+  {
+    id: 'eletrocauterizacao',
+    title: 'Eletrocauterização Uterina',
+    description: 'Tratamento preciso de lesões benignas do colo.',
+    icon: Zap
   }
 ];
 
