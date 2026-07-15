@@ -98,30 +98,20 @@ export const HeroEspecialidade: React.FC<HeroEspecialidadeProps> = ({
               </div>
             </motion.div>
 
-            {/* Right Column (only visible on desktop / fallback) */}
-            <div className={`lg:col-span-5 hidden lg:flex relative w-full h-[350px] rounded-2xl overflow-hidden shadow-md border border-slate-100 justify-center ${doctorPhoto ? 'bg-gradient-to-br from-[#0a376c] to-[#0e4d96] items-end' : 'bg-slate-100'}`}>
-              <img
-                src={doctorPhoto || imagem}
-                alt={doctorPhoto ? `Foto de ${doctorName} - Especialista em ${nome} em Irecê` : `Especialista em ${nome} em Irecê`}
-                className={doctorPhoto ? "h-full w-auto object-cover" : "w-full h-full object-cover"}
-                style={doctorPhoto ? { objectPosition: doctorPhotoPosition || 'center 25%' } : undefined}
-                fetchPriority="high"
-                loading="eager"
-                width="880"
-                height="500"
-              />
-            </div>
+            {/* Right Column spacer to align text to the left 58% */}
+            <div className="lg:col-span-5 hidden lg:block pointer-events-none"></div>
           </div>
         </div>
       </div>
 
       {/* Absolute Image for Desktop (Right Side Panel Background) */}
-      <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-[42%] h-full z-10 overflow-hidden">
+      <div className={`hidden lg:block absolute top-0 right-0 bottom-0 w-[42%] h-full z-10 overflow-hidden ${doctorPhoto ? 'bg-gradient-to-br from-[#0a376c] to-[#0e4d96] flex items-end justify-center' : ''}`}>
         <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white via-white/80 to-transparent z-20 pointer-events-none"></div>
         <img
-          src={imagem}
-          alt={`Fachada Centro Médico da Bahia - Especialidade de ${nome}`}
-          className="w-full h-full object-cover transition-transform duration-[3000ms] ease-out group-hover/hero:scale-105"
+          src={doctorPhoto || imagem}
+          alt={doctorPhoto ? `Foto de ${doctorName} - Especialista em ${nome}` : `Fachada Centro Médico da Bahia - Especialidade de ${nome}`}
+          className={doctorPhoto ? "h-full w-auto object-cover transition-transform duration-[3000ms] ease-out group-hover/hero:scale-105" : "w-full h-full object-cover transition-transform duration-[3000ms] ease-out group-hover/hero:scale-105"}
+          style={doctorPhoto ? { objectPosition: doctorPhotoPosition || 'center 25%' } : undefined}
           fetchPriority="high"
           loading="eager"
         />
