@@ -21,7 +21,7 @@ import { ServiceItem, FaqItem, ContactInfo, Doctor } from './types';
 export const CONTACT_INFO: ContactInfo = {
   phone: "(74) 99816-2793",
   whatsapp: "(74) 99816-2793",
-  address: "Praça João Batista, 40 - Centro, Jussara - BA",
+  address: "Rua Lafayete Coutinho, 120 - Centro, Irecê - BA",
   hours: "Segunda a Sexta: 07h às 18h | Sábado: 07h às 12h",
   email: "contato@cmb.com.br"
 };

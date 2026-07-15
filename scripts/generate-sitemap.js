@@ -61,6 +61,35 @@ try {
     console.warn('AVISO: constants.tsx não encontrado. Pulando rotas dos médicos.');
   }
 
+  // 3. Parse data/especialidades.ts to find specialty slugs for dynamic paths
+  const specialtiesPath = path.join(workspaceRoot, 'data', 'especialidades.ts');
+  if (fs.existsSync(specialtiesPath)) {
+    const specialtiesContent = fs.readFileSync(specialtiesPath, 'utf8');
+    const slugRegex = /slug:\s*['"]([a-zA-Z0-9-]+)['"]/g;
+    let match;
+    const slugs = [];
+
+    while ((match = slugRegex.exec(specialtiesContent)) !== null) {
+      if (!slugs.includes(match[1])) {
+        slugs.push(match[1]);
+      }
+    }
+
+    console.log(`Encontradas ${slugs.length} especialidades em especialidades.ts para indexação.`);
+
+    // Add specialty routes: /especialidades/:slug
+    for (const slug of slugs) {
+      entries.push({
+        loc: `https://cmbclinica.com.br/especialidades/${slug}`,
+        lastmod: new Date().toISOString().split('T')[0],
+        changefreq: 'monthly',
+        priority: 0.8
+      });
+    }
+  } else {
+    console.warn('AVISO: data/especialidades.ts não encontrado. Pulando rotas de especialidades.');
+  }
+
   // 3. Generate sitemap.xml content
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
   xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';

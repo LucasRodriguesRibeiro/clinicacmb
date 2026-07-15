@@ -4,6 +4,7 @@ import { MetaTags } from './MetaTags';
 import { StructuredData } from './StructuredData';
 import routesData from '../routes.json';
 import { DOCTORS, FAQS } from '../../constants';
+import { ESPECIALIDADES } from '../../data/especialidades';
 import { getMedicalClinicSchema } from '../schemas/medicalClinic';
 import { getPhysicianSchema, getDoctorsListSchema } from '../schemas/physician';
 import { getFaqSchema } from '../schemas/faq';
@@ -25,7 +26,9 @@ export const SEOManager: React.FC = () => {
   // 1. Identify current route metadata
   let currentMeta: RouteSEO | null = null;
   let isDoctorRoute = false;
+  let isSpecialtyRoute = false;
   let matchedDoctor: typeof DOCTORS[0] | null = null;
+  let matchedSpecialty: typeof ESPECIALIDADES[0] | null = null;
 
   // Check static routes
   const matchedRoute = (routesData as RouteSEO[]).find(
@@ -34,6 +37,25 @@ export const SEOManager: React.FC = () => {
 
   if (matchedRoute) {
     currentMeta = matchedRoute;
+  }
+
+  // Check specialty route: /especialidades/:slug
+  const specialtyMatch = pathname.match(/^\/especialidades\/([a-zA-Z0-9-]+)$/);
+  if (specialtyMatch) {
+    const specSlug = specialtyMatch[1];
+    const spec = ESPECIALIDADES.find((s) => s.slug === specSlug);
+    if (spec) {
+      isSpecialtyRoute = true;
+      matchedSpecialty = spec;
+      currentMeta = {
+        path: pathname,
+        title: spec.titleSeo,
+        description: spec.metaDescription,
+        changefreq: 'monthly',
+        priority: 0.8,
+        keywords: spec.keywords
+      };
+    }
   }
 
   // Check doctor route: /medicos/:id
@@ -46,11 +68,11 @@ export const SEOManager: React.FC = () => {
       matchedDoctor = doc;
       currentMeta = {
         path: pathname,
-        title: `${doc.name} - ${doc.specialty} em Jussara - BA | CMB Clínica`,
-        description: `Agende sua consulta com ${doc.name}, especialista em ${doc.specialty} no Centro Médico da Bahia (CMB) em Jussara - BA. Atendimento humanizado e de confiança.`,
+        title: `${doc.name} - ${doc.specialty} em Irecê - BA | CMB Clínica`,
+        description: `Agende sua consulta com ${doc.name}, especialista em ${doc.specialty} no Centro Médico da Bahia (CMB) em Irecê - BA. Atendimento humanizado e de confiança.`,
         changefreq: 'monthly',
         priority: 0.8,
-        keywords: `${doc.name.toLowerCase()}, ${doc.specialty.toLowerCase()} jussara, cmb clinica medicos, medico jussara ba`
+        keywords: `${doc.name.toLowerCase()}, ${doc.specialty.toLowerCase()} irece, cmb clinica medicos, medico irece ba`
       };
     }
   }
@@ -80,6 +102,9 @@ export const SEOManager: React.FC = () => {
     if (isDoctorRoute && matchedDoctor) {
       breadcrumbItems.push({ name: 'Corpo Clínico', item: `${url}/corpo-clinico` });
       breadcrumbItems.push({ name: matchedDoctor.name, item: canonicalUrl });
+    } else if (isSpecialtyRoute && matchedSpecialty) {
+      breadcrumbItems.push({ name: 'Especialidades', item: `${url}/#especialidades` });
+      breadcrumbItems.push({ name: matchedSpecialty.nome, item: canonicalUrl });
     } else {
       const pageName = pathname === '/corpo-clinico' ? 'Corpo Clínico' :
                        pathname === '/exames' ? 'Exames' :
@@ -101,6 +126,28 @@ export const SEOManager: React.FC = () => {
     schemas.push(getDoctorsListSchema(DOCTORS));
   } else if (isDoctorRoute && matchedDoctor) {
     schemas.push(getPhysicianSchema(matchedDoctor));
+  } else if (isSpecialtyRoute && matchedSpecialty) {
+    // MedicalClinic info
+    schemas.push(getMedicalClinicSchema());
+    // Specialty FAQ
+    schemas.push(getFaqSchema(matchedSpecialty.faqs));
+
+    // Dynamic Physician schema injection for matching doctors
+    const getDoctorsForSpecialty = (specSlug: string) => {
+      return DOCTORS.filter((doc) => {
+        const spec = doc.specialty.toLowerCase();
+        if (specSlug === 'ortopedia') return spec.includes('ortoped');
+        if (specSlug === 'pediatria') return spec.includes('pediat');
+        if (specSlug === 'ginecologia') return spec.includes('ginec');
+        if (specSlug === 'cardiologia') return spec.includes('cardio');
+        if (specSlug === 'alergologia') return spec.includes('alerg');
+        return false;
+      });
+    };
+    const matchedDocs = getDoctorsForSpecialty(matchedSpecialty.slug);
+    matchedDocs.forEach((doc) => {
+      schemas.push(getPhysicianSchema(doc));
+    });
   }
 
   return (
