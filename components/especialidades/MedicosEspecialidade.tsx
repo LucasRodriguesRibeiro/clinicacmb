@@ -41,11 +41,11 @@ export const MedicosEspecialidade: React.FC<MedicosEspecialidadeProps> = ({ nome
         </div>
 
         {filteredDoctors.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
+          <div className="flex flex-wrap gap-6 justify-center">
             {filteredDoctors.map((doctor, index) => (
               <div
                 key={doctor.id}
-                className="group bg-white rounded-2xl border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col"
+                className="group bg-white rounded-2xl border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col w-full max-w-[350px]"
               >
                 {/* Gradient header background */}
                 <div className="bg-gradient-to-br from-[#0a376c] to-[#0e4d96] pt-8 pb-14 flex justify-center relative overflow-hidden">
