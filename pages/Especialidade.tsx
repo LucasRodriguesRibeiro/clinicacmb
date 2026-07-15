@@ -32,6 +32,9 @@ export const Especialidade: React.FC = () => {
       if (specSlug === 'ginecologia') return spec.includes('ginec');
       if (specSlug === 'cardiologia') return spec.includes('cardio');
       if (specSlug === 'alergologia') return spec.includes('alerg');
+      if (specSlug === 'ortodontia') return spec.includes('ortodon');
+      if (specSlug === 'odontologia') return spec.includes('cirurgi') || spec.includes('dentista');
+      if (specSlug === 'clinica-geral') return spec.includes('clínico') || spec.includes('clinico');
       return false;
     });
   };
