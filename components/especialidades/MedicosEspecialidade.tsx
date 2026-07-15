@@ -18,6 +18,9 @@ export const MedicosEspecialidade: React.FC<MedicosEspecialidadeProps> = ({ nome
       if (slug === 'ginecologia') return spec.includes('ginec');
       if (slug === 'cardiologia') return spec.includes('cardio');
       if (slug === 'alergologia') return spec.includes('alerg');
+      if (slug === 'ortodontia') return spec.includes('ortodon');
+      if (slug === 'odontologia') return spec.includes('cirurgi') || spec.includes('dentista');
+      if (slug === 'clinica-geral') return spec.includes('clínico') || spec.includes('clinico');
       return false;
     });
   };
