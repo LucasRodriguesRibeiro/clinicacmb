@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { ESPECIALIDADES } from '../data/especialidades';
+import { DOCTORS } from '../constants';
 import { BreadcrumbEspecialidade } from '../components/especialidades/BreadcrumbEspecialidade';
 import { HeroEspecialidade } from '../components/especialidades/HeroEspecialidade';
 import { SobreEspecialidade } from '../components/especialidades/SobreEspecialidade';
@@ -22,6 +23,22 @@ export const Especialidade: React.FC = () => {
     return <Navigate to="/" replace />;
   }
 
+  // Find doctors for this specialty to use their photo in the hero banner
+  const getDoctorsForSpecialty = (specSlug: string) => {
+    return DOCTORS.filter((doc) => {
+      const spec = doc.specialty.toLowerCase();
+      if (specSlug === 'ortopedia') return spec.includes('ortoped');
+      if (specSlug === 'pediatria') return spec.includes('pediat');
+      if (specSlug === 'ginecologia') return spec.includes('ginec');
+      if (specSlug === 'cardiologia') return spec.includes('cardio');
+      if (specSlug === 'alergologia') return spec.includes('alerg');
+      return false;
+    });
+  };
+
+  const filteredDoctors = getDoctorsForSpecialty(specialty.slug);
+  const doctor = filteredDoctors.length > 0 ? filteredDoctors[0] : null;
+
   return (
     <div className="flex flex-col overflow-x-hidden w-full bg-white">
       <BreadcrumbEspecialidade nome={specialty.nome} />
@@ -29,6 +46,9 @@ export const Especialidade: React.FC = () => {
         nome={specialty.nome}
         titleSeo={specialty.titleSeo}
         imagem={specialty.imagem}
+        doctorPhoto={doctor ? doctor.photo : null}
+        doctorName={doctor ? doctor.name : null}
+        doctorPhotoPosition={doctor ? doctor.photoPosition : undefined}
       />
       <SobreEspecialidade nome={specialty.nome} descricao={specialty.descricao} />
       <SintomasEspecialidade nome={specialty.nome} sintomas={specialty.sintomas} />

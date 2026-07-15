@@ -7,9 +7,19 @@ interface HeroEspecialidadeProps {
   nome: string;
   titleSeo: string;
   imagem: string;
+  doctorPhoto?: string | null;
+  doctorName?: string | null;
+  doctorPhotoPosition?: string;
 }
 
-export const HeroEspecialidade: React.FC<HeroEspecialidadeProps> = ({ nome, titleSeo, imagem }) => {
+export const HeroEspecialidade: React.FC<HeroEspecialidadeProps> = ({ 
+  nome, 
+  titleSeo, 
+  imagem,
+  doctorPhoto,
+  doctorName,
+  doctorPhotoPosition
+}) => {
   const whatsappUrl = `https://wa.me/55${CONTACT_INFO.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(`Olá! Gostaria de agendar uma consulta com especialista em ${nome} em Irecê.`)}`;
 
   return (
@@ -20,15 +30,14 @@ export const HeroEspecialidade: React.FC<HeroEspecialidadeProps> = ({ nome, titl
 
       <div className="max-w-7xl mx-auto lg:px-8 w-full relative z-20">
         {/* Top full-width image on Mobile */}
-        <div className="lg:hidden w-full h-[240px] sm:h-[340px] relative overflow-hidden">
+        <div className={`lg:hidden w-full h-[260px] sm:h-[340px] relative overflow-hidden flex justify-center ${doctorPhoto ? 'bg-gradient-to-br from-[#0a376c] to-[#0e4d96] items-end' : ''}`}>
           <img
-            src={imagem}
-            alt={`Especialista em ${nome} em Irecê`}
-            className="w-full h-full object-cover"
+            src={doctorPhoto || imagem}
+            alt={doctorPhoto ? `Foto de ${doctorName} - Especialista em ${nome} em Irecê` : `Especialista em ${nome} em Irecê`}
+            className={doctorPhoto ? "h-full w-auto object-cover" : "w-full h-full object-cover"}
+            style={doctorPhoto ? { objectPosition: doctorPhotoPosition || 'center 25%' } : undefined}
             fetchPriority="high"
             loading="eager"
-            width="800"
-            height="340"
           />
         </div>
 
@@ -90,11 +99,12 @@ export const HeroEspecialidade: React.FC<HeroEspecialidadeProps> = ({ nome, titl
             </motion.div>
 
             {/* Right Column (only visible on desktop / fallback) */}
-            <div className="lg:col-span-5 hidden lg:block relative w-full h-[350px] rounded-2xl overflow-hidden shadow-md border border-slate-100 bg-slate-100">
+            <div className={`lg:col-span-5 hidden lg:flex relative w-full h-[350px] rounded-2xl overflow-hidden shadow-md border border-slate-100 justify-center ${doctorPhoto ? 'bg-gradient-to-br from-[#0a376c] to-[#0e4d96] items-end' : 'bg-slate-100'}`}>
               <img
-                src={imagem}
-                alt={`Especialista em ${nome} em Irecê`}
-                className="w-full h-full object-cover"
+                src={doctorPhoto || imagem}
+                alt={doctorPhoto ? `Foto de ${doctorName} - Especialista em ${nome} em Irecê` : `Especialista em ${nome} em Irecê`}
+                className={doctorPhoto ? "h-full w-auto object-cover" : "w-full h-full object-cover"}
+                style={doctorPhoto ? { objectPosition: doctorPhotoPosition || 'center 25%' } : undefined}
                 fetchPriority="high"
                 loading="eager"
                 width="880"
