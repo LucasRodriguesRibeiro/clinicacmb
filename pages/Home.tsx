@@ -427,8 +427,8 @@ export const Home: React.FC = () => {
 
       {/* CTA STRIP */}
       <div id="contato" className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-brand"></div>
-        <div className="absolute inset-0 bg-primary-900/90"></div>
+        <div className="absolute inset-0 bg-gradient-primary"></div>
+        <div className="absolute inset-0 bg-black/10"></div>
         <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/medical-icons.png')]"></div>
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">

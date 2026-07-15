@@ -12,8 +12,8 @@ export const CTAEspecialidade: React.FC<CTAEspecialidadeProps> = ({ nome }) => {
   return (
     <div className="relative py-20 overflow-hidden">
       {/* Background visual styles */}
-      <div className="absolute inset-0 bg-[#0055A4]"></div>
-      <div className="absolute inset-0 bg-gradient-to-r from-[#003362] to-[#0055A4] opacity-90"></div>
+      <div className="absolute inset-0 bg-gradient-primary"></div>
+      <div className="absolute inset-0 bg-black/10"></div>
       <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/medical-icons.png')]"></div>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
