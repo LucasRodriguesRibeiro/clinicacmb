@@ -9,6 +9,7 @@ interface HeroEspecialidadeProps {
   imagem: string;
   doctorPhoto?: string | null;
   doctorName?: string | null;
+  doctorCrm?: string | null;
   doctorPhotoPosition?: string;
 }
 
@@ -18,9 +19,10 @@ export const HeroEspecialidade: React.FC<HeroEspecialidadeProps> = ({
   imagem,
   doctorPhoto,
   doctorName,
+  doctorCrm,
   doctorPhotoPosition
 }) => {
-  const whatsappUrl = `https://wa.me/55${CONTACT_INFO.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(`Olá! Gostaria de agendar uma consulta com especialista em ${nome} em Irecê.`)}`;
+  const whatsappUrl = `https://wa.me/55${CONTACT_INFO.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(`Olá! Gostaria de agendar uma consulta com especialista em ${nome} em Jussara.`)}`;
 
   return (
     <div className="group/hero relative lg:min-h-[460px] flex flex-col lg:flex-row lg:items-center bg-gradient-to-br from-white via-slate-50 to-blue-50/20 overflow-hidden pt-0 pb-8 lg:pt-8 lg:pb-16 border-b border-slate-100">
@@ -33,12 +35,20 @@ export const HeroEspecialidade: React.FC<HeroEspecialidadeProps> = ({
         <div className={`lg:hidden w-full h-[260px] sm:h-[340px] relative overflow-hidden flex justify-center ${doctorPhoto ? 'bg-slate-50' : ''}`}>
           <img
             src={doctorPhoto || imagem}
-            alt={doctorPhoto ? `Foto de ${doctorName} - Especialista em ${nome} em Irecê` : `Especialista em ${nome} em Irecê`}
+            alt={doctorPhoto ? `Foto de ${doctorName} - Especialista em ${nome} em Jussara` : `Especialista em ${nome} em Jussara`}
             className="w-full h-full object-cover"
             style={doctorPhoto ? { objectPosition: doctorPhotoPosition || 'center 25%' } : undefined}
             fetchPriority="high"
             loading="eager"
           />
+          {doctorPhoto && doctorName && (
+            <div className="absolute bottom-4 right-4 z-30 bg-white/90 backdrop-blur-sm border border-slate-100 py-1.5 px-3 rounded-lg shadow-md max-w-[240px]">
+              <p className="text-[10px] font-black text-slate-800 leading-tight">{doctorName}</p>
+              {doctorCrm && (
+                <p className="text-[9px] text-slate-500 font-bold mt-0.5 tracking-wide">{doctorCrm}</p>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Overlapping Content Card on Mobile */}
@@ -61,7 +71,7 @@ export const HeroEspecialidade: React.FC<HeroEspecialidadeProps> = ({
               {/* H1 Headline */}
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 leading-tight mb-4">
                 Médico especialista em <br className="hidden sm:inline" />
-                <span className="text-[#0a376c]">{nome} em Irecê - BA</span>
+                <span className="text-[#0a376c]">{nome} em Jussara - BA</span>
               </h1>
 
               {/* Subtitle */}
@@ -115,6 +125,15 @@ export const HeroEspecialidade: React.FC<HeroEspecialidadeProps> = ({
           fetchPriority="high"
           loading="eager"
         />
+        {/* Doctor Name Overlay */}
+        {doctorPhoto && doctorName && (
+          <div className="absolute bottom-6 right-6 z-30 bg-white/80 backdrop-blur-md border border-slate-100 py-2.5 px-4 rounded-xl shadow-lg max-w-[280px]">
+            <p className="text-xs font-black text-slate-800 leading-tight">{doctorName}</p>
+            {doctorCrm && (
+              <p className="text-[10px] text-slate-500 font-bold mt-0.5 tracking-wide">{doctorCrm}</p>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

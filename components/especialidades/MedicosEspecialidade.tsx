@@ -36,7 +36,7 @@ export const MedicosEspecialidade: React.FC<MedicosEspecialidadeProps> = ({ nome
             Especialistas em {nome}
           </h2>
           <p className="mt-3 text-slate-600 text-base sm:text-lg max-w-xl mx-auto">
-            Conheça nossos médicos que atendem a especialidade de {nome} no Centro Médico da Bahia em Irecê.
+            Conheça nossos médicos que atendem a especialidade de {nome} no Centro Médico da Bahia em Jussara.
           </p>
         </div>
 
@@ -80,6 +80,11 @@ export const MedicosEspecialidade: React.FC<MedicosEspecialidadeProps> = ({ nome
                   <h3 className="font-black text-base text-slate-900 text-center leading-tight mb-1">
                     {doctor.name}
                   </h3>
+
+                  {/* CRM / CRO */}
+                  <span className="text-[11px] text-slate-400 font-bold mb-3 tracking-wide">
+                    {doctor.crm}
+                  </span>
                 </div>
 
                 {/* Book button */}
@@ -104,7 +109,7 @@ export const MedicosEspecialidade: React.FC<MedicosEspecialidadeProps> = ({ nome
             </div>
             <h3 className="text-xl font-bold text-slate-800 mb-3">Atendimento sob Agendamento</h3>
             <p className="text-sm sm:text-base text-slate-600 leading-relaxed mb-6">
-              Nossos especialistas em <strong>{nome} em Irecê</strong> atendem em dias programados. Entre em contato com a nossa equipe no WhatsApp para consultar datas disponíveis e agendar sua avaliação.
+              Nossos especialistas em <strong>{nome} em Jussara</strong> atendem em dias programados. Entre em contato com a nossa equipe no WhatsApp para consultar datas disponíveis e agendar sua avaliação.
             </p>
             <a
               href={whatsappUrl}

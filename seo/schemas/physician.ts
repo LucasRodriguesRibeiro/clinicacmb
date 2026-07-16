@@ -30,10 +30,10 @@ export const getPhysicianSchema = (doctor: Doctor) => {
     },
     'address': {
       '@type': 'PostalAddress',
-      'streetAddress': 'Rua Lafayete Coutinho, 120 - Centro',
-      'addressLocality': 'Irecê',
+      'streetAddress': 'Praça João Batista, 40 - Centro',
+      'addressLocality': 'Jussara',
       'addressRegion': 'BA',
-      'postalCode': '44900-000',
+      'postalCode': '44925-000',
       'addressCountry': 'BR'
     }
   };

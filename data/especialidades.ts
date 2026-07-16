@@ -40,7 +40,7 @@ export const ESPECIALIDADES: Specialty[] = [
   {
     nome: "Cardiologia",
     slug: "cardiologia",
-    descricao: "A Cardiologia do Centro Médico da Bahia é focada na prevenção, diagnóstico e tratamento de doenças que acometem o coração e o sistema circulatório. O acompanhamento cardiovascular periódico é fundamental para prevenir infartos, controlar a hipertensão e tratar arritmias. Se você precisa de um cardiologista em Irecê, oferecemos atendimento com médico especialista e exames rápidos para cuidar do seu coração.",
+    descricao: "A Cardiologia do Centro Médico da Bahia é focada na prevenção, diagnóstico e tratamento de doenças que acometem o coração e o sistema circulatório. O acompanhamento cardiovascular periódico é fundamental para prevenir infartos, controlar a hipertensão e tratar arritmias. Se você precisa de um cardiologista em Jussara, oferecemos atendimento com médico especialista e exames rápidos para cuidar do seu coração.",
     imagem: "/imagens/fachada.webp",
     sintomas: [
       "Dor ou aperto no peito durante esforços físicos",
@@ -72,7 +72,7 @@ export const ESPECIALIDADES: Specialty[] = [
     ],
     faqs: [
       {
-        question: "Quando devo procurar um cardiologista em Irecê?",
+        question: "Quando devo procurar um cardiologista em Jussara?",
         answer: "A partir de 40 anos para homens e 45 anos para mulheres é indicada a consulta de rotina anual. Caso haja histórico familiar de doenças cardíacas ou sintomas como dor no peito, a avaliação deve ser feita imediatamente."
       },
       {
@@ -84,16 +84,16 @@ export const ESPECIALIDADES: Specialty[] = [
         answer: "Sim, a fadiga extrema ao fazer pequenos esforços pode ser um sinal de que o coração não está conseguindo bombear o sangue com a força necessária."
       }
     ],
-    keywords: "cardiologista irece, consulta cardiologista irece, clinica cardiologia irece, exames do coracao irece, medico cardiologista irece",
-    titleSeo: "Cardiologista em Irecê - BA | Centro Médico da Bahia",
-    metaDescription: "Agende sua consulta com cardiologista em Irecê no Centro Médico da Bahia. Atendimento especializado, exames do coração e controle de hipertensão.",
+    keywords: "cardiologista jussara, consulta cardiologista jussara, clinica cardiologia jussara, exames do coracao jussara, medico cardiologista jussara",
+    titleSeo: "Cardiologista em Jussara - BA | Centro Médico da Bahia",
+    metaDescription: "Agende sua consulta com cardiologista em Jussara no Centro Médico da Bahia. Atendimento especializado, exames do coração e controle de hipertensão.",
     schemaMedicalSpecialty: "Cardiovascular",
     icon: Heart
   },
   {
     nome: "Pediatria",
     slug: "pediatria",
-    descricao: "A Pediatria da CMB Clínica acompanha a saúde integral de bebês, crianças e adolescentes. O pediatra cuida do crescimento saudável, nutrição, prevenção de infecções e calendário vacinal. Oferecemos consulta com pediatra em Irecê em um ambiente seguro, acolhedor e humanizado para o desenvolvimento do seu filho.",
+    descricao: "A Pediatria da CMB Clínica acompanha a saúde integral de bebês, crianças e adolescentes. O pediatra cuida do crescimento saudável, nutrição, prevenção de infecções e calendário vacinal. Oferecemos consulta com pediatra em Jussara em um ambiente seguro, acolhedor e humanizado para o desenvolvimento do seu filho.",
     imagem: "/imagens/fachada.webp",
     sintomas: [
       "Febre alta ou persistente",
@@ -133,16 +133,16 @@ export const ESPECIALIDADES: Specialty[] = [
         answer: "É o ramo da pediatria focado na prevenção e no acompanhamento do crescimento físico e mental da criança, identificando precocemente qualquer alteração."
       }
     ],
-    keywords: "pediatra irece, consulta pediatra irece, clinica pediatrica irece, medico de crianca irece, consulta puericultura irece",
-    titleSeo: "Pediatra em Irecê - BA | Centro Médico da Bahia",
-    metaDescription: "Agende consulta com pediatra em Irecê na CMB Clínica. Acompanhamento completo da puericultura, crescimento infantil e vacinação.",
+    keywords: "pediatra jussara, consulta pediatra jussara, clinica pediatrica jussara, medico de crianca jussara, consulta puericultura jussara",
+    titleSeo: "Pediatra em Jussara - BA | Centro Médico da Bahia",
+    metaDescription: "Agende consulta com pediatra em Jussara na CMB Clínica. Acompanhamento completo da puericultura, crescimento infantil e vacinação.",
     schemaMedicalSpecialty: "Pediatric",
     icon: Baby
   },
   {
     nome: "Ginecologia",
     slug: "ginecologia",
-    descricao: "A Ginecologia do Centro Médico da Bahia é voltada à saúde preventiva da mulher em todas as suas fases. Realizamos exames preventivos (Papanicolau), acompanhamento de cólicas intensas, infecções urinárias, corrimentos, climatério e planejamento familiar (incluindo colocação de DIU). Oferecemos consulta com ginecologista em Irecê com alto rigor clínico e humanização.",
+    descricao: "A Ginecologia do Centro Médico da Bahia é voltada à saúde preventiva da mulher em todas as suas fases. Realizamos exames preventivos (Papanicolau), acompanhamento de cólicas intensas, infecções urinárias, corrimentos, climatério e planejamento familiar (incluindo colocação de DIU). Oferecemos consulta com ginecologista em Jussara com alto rigor clínico e humanização.",
     imagem: "/imagens/fachada.webp",
     sintomas: [
       "Cólicas menstruais muito fortes ou dor pélvica",
@@ -182,16 +182,16 @@ export const ESPECIALIDADES: Specialty[] = [
         answer: "O Papanicolau deve ser feito anualmente por mulheres sexualmente ativas. A regularidade pode mudar a critério médico após resultados normais consecutivos."
       }
     ],
-    keywords: "ginecologista irece, ginecologia irece, preventivo papanicolau irece, colocacao de diu irece, ginecologista clinica irece",
-    titleSeo: "Ginecologista em Irecê - BA | Centro Médico da Bahia",
-    metaDescription: "Precisa de ginecologista em Irecê? Agende preventivos, ultrassom transvaginal e planejamento contraceptivo no Centro Médico da Bahia.",
+    keywords: "ginecologista jussara, ginecologia jussara, preventivo papanicolau jussara, colocacao de diu jussara, ginecologista clinica jussara",
+    titleSeo: "Ginecologista em Jussara - BA | Centro Médico da Bahia",
+    metaDescription: "Precisa de ginecologista em Jussara? Agende preventivos, ultrassom transvaginal e planejamento contraceptivo no Centro Médico da Bahia.",
     schemaMedicalSpecialty: "Gynecologic",
     icon: Flower
   },
   {
     nome: "Ortopedia",
     slug: "ortopedia",
-    descricao: "A Ortopedia do Centro Médico da Bahia é especializada em diagnosticar e tratar disfunções, lesões e deformidades que acometem o aparelho locomotor (ossos, músculos, tendões, articulações e ligamentos). Cuidamos de dores nas costas, artrose, tendinites, torções e reabilitação pós-fratura. Agende sua consulta com ortopedista em Irecê para recuperar sua mobilidade.",
+    descricao: "A Ortopedia do Centro Médico da Bahia é especializada em diagnosticar e tratar disfunções, lesões e deformidades que acometem o aparelho locomotor (ossos, músculos, tendões, articulações e ligamentos). Cuidamos de dores nas costas, artrose, tendinites, torções e reabilitação pós-fratura. Agende sua consulta com ortopedista em Jussara para recuperar sua mobilidade.",
     imagem: "/imagens/fachada.webp",
     sintomas: [
       "Dor crônica nas costas, ombros ou pescoço",
@@ -231,16 +231,16 @@ export const ESPECIALIDADES: Specialty[] = [
         answer: "O tratamento envolve perda de peso, fortalecimento muscular através de exercícios dirigidos, medicamentos analgésicos e, em alguns casos, infiltrações articulares."
       }
     ],
-    keywords: "ortopedista irece, ortopedia irece, consulta ortopedista irece, dor na coluna tratamento irece, medico de ossos irece",
-    titleSeo: "Ortopedista em Irecê - BA | Centro Médico da Bahia",
-    metaDescription: "Consulte ortopedista em Irecê no Centro Médico da Bahia. Especialistas em dor na coluna, joelhos, articulações e reabilitação de lesões.",
+    keywords: "ortopedista jussara, ortopedia jussara, consulta ortopedista jussara, dor na coluna tratamento jussara, medico de ossos jussara",
+    titleSeo: "Ortopedista em Jussara - BA | Centro Médico da Bahia",
+    metaDescription: "Consulte ortopedista em Jussara no Centro Médico da Bahia. Especialistas em dor na coluna, joelhos, articulações e reabilitação de lesões.",
     schemaMedicalSpecialty: "Orthopedic",
     icon: Bone
   },
   {
     nome: "Ortodontia",
     slug: "ortodontia",
-    descricao: "A Ortodontia da CMB Clínica foca no alinhamento correto dos dentes e das arcadas dentárias, devolvendo a funcionalidade da mordida, facilitando a higiene bucal e melhorando a estética do sorriso. Trabalhamos com aparelhos ortodônticos modernos, com planejamento personalizado. Agende sua consulta com ortodontista em Irecê e conquiste o sorriso que você merece.",
+    descricao: "A Ortodontia da CMB Clínica foca no alinhamento correto dos dentes e das arcadas dentárias, devolvendo a funcionalidade da mordida, facilitando a higiene bucal e melhorando a estética do sorriso. Trabalhamos com aparelhos ortodônticos modernos, com planejamento personalizado. Agende sua consulta com ortodontista em Jussara e conquiste o sorriso que você merece.",
     imagem: "/imagens/fachada.webp",
     sintomas: [
       "Dentes encavalados, tortos ou muito espaçados",
@@ -280,16 +280,16 @@ export const ESPECIALIDADES: Specialty[] = [
         answer: "O tempo varia conforme a complexidade de cada caso, durando em média entre 12 e 24 meses, dependendo da colaboração do paciente nas manutenções."
       }
     ],
-    keywords: "ortodontista irece, aparelho dentario irece, clinica de ortodontia irece, colocar aparelho irece, dentista aparelho irece",
-    titleSeo: "Ortodontista em Irecê - BA | Centro Médico da Bahia",
-    metaDescription: "Precisa colocar aparelho? Consulte ortodontista em Irecê na CMB Clínica. Planejamento moderno, manutenção e alinhamento do sorriso.",
+    keywords: "ortodontista jussara, aparelho dentario jussara, clinica de ortodontia jussara, colocar aparelho jussara, dentista aparelho jussara",
+    titleSeo: "Ortodontista em Jussara - BA | Centro Médico da Bahia",
+    metaDescription: "Precisa colocar aparelho? Consulte ortodontista em Jussara na CMB Clínica. Planejamento moderno, manutenção e alinhamento do sorriso.",
     schemaMedicalSpecialty: "PublicHealth",
     icon: Sparkles
   },
   {
     nome: "Odontologia",
     slug: "odontologia",
-    descricao: "A Odontologia do Centro Médico da Bahia cuida da saúde e higiene bucal integral de toda a família. Realizamos procedimentos clínicos preventivos, limpeza, restauração, extrações e tratamentos de gengiva. Se você busca um dentista em Irecê para garantir dentes saudáveis e livres de dor, conte com a nossa equipe de cirurgiões-dentistas qualificados.",
+    descricao: "A Odontologia do Centro Médico da Bahia cuida da saúde e higiene bucal integral de toda a família. Realizamos procedimentos clínicos preventivos, limpeza, restauração, extrações e tratamentos de gengiva. Se você busca um dentista em Jussara para garantir dentes saudáveis e livres de dor, conte com a nossa equipe de cirurgiões-dentistas qualificados.",
     imagem: "/imagens/fachada.webp",
     sintomas: [
       "Dor de dente aguda ou ao consumir alimentos frios/quentes",
@@ -321,7 +321,7 @@ export const ESPECIALIDADES: Specialty[] = [
     ],
     faqs: [
       {
-        question: "De quanto em quanto tempo devo ir ao dentista em Irecê?",
+        question: "De quanto em quanto tempo devo ir ao dentista em Jussara?",
         answer: "Recomenda-se realizar uma visita preventiva a cada 6 meses para fazer limpeza profissional e detectar problemas em estágio inicial."
       },
       {
@@ -329,16 +329,16 @@ export const ESPECIALIDADES: Specialty[] = [
         answer: "A causa mais comum é o acúmulo de placa bacteriana decorrente de higienização incorreta, levando à inflamação da gengiva (gengivite). Deve ser tratada pelo dentista."
       }
     ],
-    keywords: "dentista irece, clinica odontologica irece, consulta dentista irece, limpeza de dente irece, obturacao dentista irece",
-    titleSeo: "Dentista em Irecê - BA | Centro Médico da Bahia",
-    metaDescription: "Agende sua consulta com dentista em Irecê no Centro Médico da Bahia. Limpeza profissional, restaurações e tratamentos para sua saúde bucal.",
+    keywords: "dentista jussara, clinica odontologica jussara, consulta dentista jussara, limpeza de dente jussara, obturacao dentista jussara",
+    titleSeo: "Dentista em Jussara - BA | Centro Médico da Bahia",
+    metaDescription: "Agende sua consulta com dentista em Jussara no Centro Médico da Bahia. Limpeza profissional, restaurações e tratamentos para sua saúde bucal.",
     schemaMedicalSpecialty: "PublicHealth",
     icon: Smile
   },
   {
     nome: "Alergologia",
     slug: "alergologia",
-    descricao: "A Alergologia da CMB Clínica é dedicada à prevenção, diagnóstico e tratamento de alergias que afetam as vias respiratórias, pele e o sistema digestivo. Tratamos rinite alérgica, asma, dermatites e alergias alimentares. Agende sua consulta com alergologista em Irecê e recupere seu bem-estar diário, respirando melhor e vivendo sem coceiras irritantes.",
+    descricao: "A Alergologia da CMB Clínica é dedicada à prevenção, diagnóstico e tratamento de alergias que afetam as vias respiratórias, pele e o sistema digestivo. Tratamos rinite alérgica, asma, dermatites e alergias alimentares. Agende sua consulta com alergologista em Jussara e recupere seu bem-estar diário, respirando melhor e vivendo sem coceiras irritantes.",
     imagem: "/imagens/fachada.webp",
     sintomas: [
       "Espirros frequentes, coriza constante e coceira no nariz",
@@ -378,16 +378,16 @@ export const ESPECIALIDADES: Specialty[] = [
         answer: "O teste cutâneo consiste na aplicação de gotas de substâncias alérgenas na pele do braço, fazendo um leve estímulo. Em 15 minutos, se houver reação (como uma pequena bolha vermelha), o teste confirma a sensibilidade."
       }
     ],
-    keywords: "alergologista irece, consulta alergia irece, teste alergico irece, rinite alergica tratamento irece, clinica alergia irece",
-    titleSeo: "Alergologista em Irecê - BA | Centro Médico da Bahia",
-    metaDescription: "Consulte alergologista em Irecê no Centro Médico da Bahia. Diagnóstico e tratamento de rinite alérgica, asma, dermatites e testes de alergia.",
+    keywords: "alergologista jussara, consulta alergia jussara, teste alergico jussara, rinite alergica tratamento jussara, clinica alergia jussara",
+    titleSeo: "Alergologista em Jussara - BA | Centro Médico da Bahia",
+    metaDescription: "Consulte alergologista em Jussara no Centro Médico da Bahia. Diagnóstico e tratamento de rinite alérgica, asma, dermatites e testes de alergia.",
     schemaMedicalSpecialty: "PublicHealth",
     icon: ShieldAlert
   },
   {
     nome: "Clínica Geral",
     slug: "clinica-geral",
-    descricao: "A Clínica Geral da CMB Clínica é a porta de entrada para a sua saúde. O clínico geral realiza uma avaliação global do organismo, trata doenças agudas comuns, gerencia check-ups preventivos anuais e orienta o encaminhamento para outras especialidades quando necessário. Encontre seu clínico geral em Irecê e mantenha seus exames em dia com comodidade.",
+    descricao: "A Clínica Geral da CMB Clínica é a porta de entrada para a sua saúde. O clínico geral realiza uma avaliação global do organismo, trata doenças agudas comuns, gerencia check-ups preventivos anuais e orienta o encaminhamento para outras especialidades quando necessário. Encontre seu clínico geral em Jussara e mantenha seus exames em dia com comodidade.",
     imagem: "/imagens/fachada.webp",
     sintomas: [
       "Dores de cabeça constantes ou cansaço inexplicável",
@@ -427,9 +427,9 @@ export const ESPECIALIDADES: Specialty[] = [
         answer: "Sempre que tiver sintomas inespecíficos (como dor de cabeça, cansaço, febre) ou quando quiser realizar seus exames preventivos de rotina. O clínico geral tem a visão ampla capaz de dar o primeiro diagnóstico e orientar você."
       }
     ],
-    keywords: "clinico geral irece, consulta clinico geral irece, exames de rotina irece, clinica medica irece, checkup anual irece",
-    titleSeo: "Clínico Geral em Irecê - BA | Centro Médico da Bahia",
-    metaDescription: "Agende consulta com clínico geral em Irecê no Centro Médico da Bahia. Check-up preventivo completo, exames de rotina e atendimento humanizado.",
+    keywords: "clinico geral jussara, consulta clinico geral jussara, exames de rotina jussara, clinica medica jussara, checkup anual jussara",
+    titleSeo: "Clínico Geral em Jussara - BA | Centro Médico da Bahia",
+    metaDescription: "Agende consulta com clínico geral em Jussara no Centro Médico da Bahia. Check-up preventivo completo, exames de rotina e atendimento humanizado.",
     schemaMedicalSpecialty: "PublicHealth",
     icon: Stethoscope
   }

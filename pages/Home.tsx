@@ -296,6 +296,11 @@ export const Home: React.FC = () => {
                     {doctor.name}
                   </h3>
 
+                  {/* CRM / CRO */}
+                  <span className="text-[11px] text-slate-400 font-bold mb-3 tracking-wide">
+                    {doctor.crm}
+                  </span>
+
                 </div>
 
                 {/* Book button */}

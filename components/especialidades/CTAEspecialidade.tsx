@@ -7,7 +7,7 @@ interface CTAEspecialidadeProps {
 }
 
 export const CTAEspecialidade: React.FC<CTAEspecialidadeProps> = ({ nome }) => {
-  const whatsappUrl = `https://wa.me/55${CONTACT_INFO.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(`Olá! Gostaria de agendar uma consulta com especialista em ${nome} em Irecê.`)}`;
+  const whatsappUrl = `https://wa.me/55${CONTACT_INFO.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(`Olá! Gostaria de agendar uma consulta com especialista em ${nome} em Jussara.`)}`;
 
   return (
     <div className="relative py-20 overflow-hidden">
@@ -24,7 +24,7 @@ export const CTAEspecialidade: React.FC<CTAEspecialidadeProps> = ({ nome }) => {
           Pronto para cuidar da sua saúde em {nome} com os melhores especialistas?
         </h2>
         <p className="text-blue-100 mb-10 text-lg sm:text-xl font-light">
-          Agende agora a sua avaliação no Centro Médico da Bahia e garanta um acompanhamento preventivo humanizado e eficiente em Irecê - BA.
+          Agende agora a sua avaliação no Centro Médico da Bahia e garanta um acompanhamento preventivo humanizado e eficiente em Jussara - BA.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-6">
           <a href={whatsappUrl} target="_blank" rel="noreferrer" className="w-full sm:w-auto">

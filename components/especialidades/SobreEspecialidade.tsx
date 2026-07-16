@@ -19,10 +19,10 @@ export const SobreEspecialidade: React.FC<SobreEspecialidadeProps> = ({ nome, de
                 {descricao}
               </p>
               <p className="text-sm sm:text-base text-slate-600">
-                O acompanhamento preventivo com um <strong>médico especialista em {nome} em Irecê</strong> é de extrema importância para rastrear patologias silenciosas em estágios iniciais, permitindo tratamentos muito mais eficazes e menos invasivos. A prevenção é sempre a melhor escolha para uma vida longa, saudável e feliz.
+                O acompanhamento preventivo com um <strong>médico especialista em {nome} em Jussara</strong> é de extrema importância para rastrear patologias silenciosas em estágios iniciais, permitindo tratamentos muito mais eficazes e menos invasivos. A prevenção é sempre a melhor escolha para uma vida longa, saudável e feliz.
               </p>
               <p className="text-sm sm:text-base text-slate-600">
-                No <strong>Centro Médico da Bahia (CMB)</strong>, priorizamos o atendimento humanizado, entendendo a individualidade de cada paciente de Irecê e região. Nossa equipe médica qualificada está à disposição para oferecer um diagnóstico preciso e conduzir as melhores práticas de saúde baseadas em evidências científicas.
+                No <strong>Centro Médico da Bahia (CMB)</strong>, priorizamos o atendimento humanizado, entendendo a individualidade de cada paciente de Jussara e região. Nossa equipe médica qualificada está à disposição para oferecer um diagnóstico preciso e conduzir as melhores práticas de saúde baseadas em evidências científicas.
               </p>
             </div>
           </div>
@@ -35,7 +35,7 @@ export const SobreEspecialidade: React.FC<SobreEspecialidadeProps> = ({ nome, de
               </li>
               <li className="flex items-start gap-2.5">
                 <span className="w-5 h-5 rounded-full bg-blue-50 text-[#0055A4] flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>
-                <span><strong>Estrutura Completa:</strong> Consultórios modernos no centro de Irecê - BA.</span>
+                <span><strong>Estrutura Completa:</strong> Consultórios modernos no centro de Jussara - BA.</span>
               </li>
               <li className="flex items-start gap-2.5">
                 <span className="w-5 h-5 rounded-full bg-blue-50 text-[#0055A4] flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">✓</span>

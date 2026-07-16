@@ -68,11 +68,11 @@ export const SEOManager: React.FC = () => {
       matchedDoctor = doc;
       currentMeta = {
         path: pathname,
-        title: `${doc.name} - ${doc.specialty} em Irecê - BA | CMB Clínica`,
-        description: `Agende sua consulta com ${doc.name}, especialista em ${doc.specialty} no Centro Médico da Bahia (CMB) em Irecê - BA. Atendimento humanizado e de confiança.`,
+        title: `${doc.name} - ${doc.specialty} em Jussara - BA | CMB Clínica`,
+        description: `Agende sua consulta com ${doc.name}, especialista em ${doc.specialty} no Centro Médico da Bahia (CMB) em Jussara - BA. Atendimento humanizado e de confiança.`,
         changefreq: 'monthly',
         priority: 0.8,
-        keywords: `${doc.name.toLowerCase()}, ${doc.specialty.toLowerCase()} irece, cmb clinica medicos, medico irece ba`
+        keywords: `${doc.name.toLowerCase()}, ${doc.specialty.toLowerCase()} jussara, cmb clinica medicos, medico jussara ba`
       };
     }
   }

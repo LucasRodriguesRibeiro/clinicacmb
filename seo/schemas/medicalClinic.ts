@@ -53,16 +53,16 @@ export const getMedicalClinicSchema = () => {
         'priceRange': '$$',
         'address': {
           '@type': 'PostalAddress',
-          'streetAddress': 'Rua Lafayete Coutinho, 120 - Centro',
-          'addressLocality': 'Irecê',
+          'streetAddress': 'Praça João Batista, 40 - Centro',
+          'addressLocality': 'Jussara',
           'addressRegion': 'BA',
-          'postalCode': '44900-000',
+          'postalCode': '44925-000',
           'addressCountry': 'BR'
         },
         'geo': {
           '@type': 'GeoCoordinates',
-          'latitude': '-11.303975',
-          'longitude': '-41.856942'
+          'latitude': '-11.0488',
+          'longitude': '-41.9699'
         },
         'openingHoursSpecification': [
           {
@@ -88,16 +88,16 @@ export const getMedicalClinicSchema = () => {
         'url': `${url}/`,
         'address': {
           '@type': 'PostalAddress',
-          'streetAddress': 'Rua Lafayete Coutinho, 120 - Centro',
-          'addressLocality': 'Irecê',
+          'streetAddress': 'Praça João Batista, 40 - Centro',
+          'addressLocality': 'Jussara',
           'addressRegion': 'BA',
-          'postalCode': '44900-000',
+          'postalCode': '44925-000',
           'addressCountry': 'BR'
         },
         'geo': {
           '@type': 'GeoCoordinates',
-          'latitude': '-11.303975',
-          'longitude': '-41.856942'
+          'latitude': '-11.0488',
+          'longitude': '-41.9699'
         },
         'openingHours': 'Mo-Fr 07:00-18:00, Sa 07:00-12:00'
       }

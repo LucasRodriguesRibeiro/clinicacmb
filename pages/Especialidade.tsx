@@ -51,6 +51,7 @@ export const Especialidade: React.FC = () => {
         imagem={specialty.imagem}
         doctorPhoto={doctor ? doctor.photo : null}
         doctorName={doctor ? doctor.name : null}
+        doctorCrm={doctor ? doctor.crm : null}
         doctorPhotoPosition={doctor ? doctor.photoPosition : undefined}
       />
       <SobreEspecialidade nome={specialty.nome} descricao={specialty.descricao} />
@@ -66,7 +67,7 @@ export const Especialidade: React.FC = () => {
               Diferenciais do Centro Médico da Bahia
             </h2>
             <p className="mt-3 text-slate-600 text-sm sm:text-base max-w-xl mx-auto">
-              Veja por que somos a clínica de referência no atendimento médico em Irecê e região.
+              Veja por que somos a clínica de referência no atendimento médico em Jussara e região.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -88,7 +89,7 @@ export const Especialidade: React.FC = () => {
             </div>
             <div className="p-6 bg-slate-50 border border-slate-100/50 rounded-2xl hover:shadow-md transition-shadow">
               <h3 className="font-bold text-[#0055A4] text-base sm:text-lg mb-2">Localização Privilegiada</h3>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">Fácil acesso no centro da cidade, garantindo conveniência para Irecê e entorno.</p>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">Fácil acesso no centro da cidade, garantindo conveniência para Jussara e entorno.</p>
             </div>
             <div className="p-6 bg-slate-50 border border-slate-100/50 rounded-2xl hover:shadow-md transition-shadow">
               <h3 className="font-bold text-[#0055A4] text-base sm:text-lg mb-2">Especialidades Integradas</h3>
