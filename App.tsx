@@ -5,6 +5,7 @@ import { Footer } from './components/Footer';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { Home } from './pages/Home';
 import { Especialidade } from './pages/Especialidade';
+import { DrMisterbrando } from './pages/DrMisterbrando';
 import { SEOManager } from './seo/components/SEOManager';
 import { ScrollToSection } from './seo/components/ScrollToSection';
 import { Analytics } from './seo/components/Analytics';
@@ -24,6 +25,7 @@ const App: React.FC = () => {
             <Route path="/exames" element={<Home />} />
             <Route path="/contato" element={<Home />} />
             <Route path="/especialidades/:slug" element={<Especialidade />} />
+            <Route path="/drmisterbrando" element={<DrMisterbrando />} />
             <Route path="*" element={<Home />} />
           </Routes>
         </main>

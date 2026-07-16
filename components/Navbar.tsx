@@ -9,8 +9,35 @@ export const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileSpecOpen, setIsMobileSpecOpen] = useState(false);
   const { pathname } = useLocation();
-
   const whatsappUrl = `https://wa.me/55${CONTACT_INFO.whatsapp.replace(/\D/g, '')}?text=Olá!%20Gostaria%20de%20agendar%20uma%20consulta.`;
+
+  if (pathname === '/drmisterbrando') {
+    const docWhatsappUrl = `https://wa.me/55${CONTACT_INFO.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent("Olá! Gostaria de agendar uma consulta de Ortopedia com o Dr. Mistebrando em Jussara.")}`;
+    return (
+      <nav className="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 transition-all duration-300 border-b border-slate-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-20">
+            <div className="flex items-center">
+              <Link to="/drmisterbrando" className="flex-shrink-0 flex items-center" aria-label="Centro Médico da Bahia - Voltar ao início">
+                <Logo className="h-12 w-auto" />
+              </Link>
+            </div>
+            <div className="flex items-center">
+              <a
+                href={docWhatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[#25D366] hover:bg-[#128C7E] text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-full font-bold text-xs sm:text-sm flex items-center gap-1.5 sm:gap-2 transition-all hover:shadow-lg shadow-green-500/10 hover:-translate-y-0.5"
+              >
+                <CalendarCheck className="w-4.5 h-4.5" />
+                <span>Agendar pelo WhatsApp</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    );
+  }
 
   return (
     <nav className="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 transition-all duration-300 border-b border-slate-100">
