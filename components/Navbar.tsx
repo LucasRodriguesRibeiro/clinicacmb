@@ -14,8 +14,8 @@ export const Navbar: React.FC = () => {
   if (pathname === '/drmisterbrando') {
     const docWhatsappUrl = `https://wa.me/55${CONTACT_INFO.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent("Olá! Gostaria de agendar uma consulta de Ortopedia com o Dr. Mistebrando em Jussara.")}`;
     return (
-      <nav className="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 transition-all duration-300 border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav className="bg-white sticky top-0 z-50 border-b border-slate-100/60">
+        <div className="max-w-[1200px] mx-auto px-6">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center">
               <Link to="/drmisterbrando" className="flex-shrink-0 flex items-center" aria-label="Centro Médico da Bahia - Voltar ao início">
@@ -23,18 +23,29 @@ export const Navbar: React.FC = () => {
               </Link>
             </div>
             <div className="flex items-center">
-              <a
-                href={docWhatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-[#25D366] hover:bg-[#128C7E] text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-full font-bold text-xs sm:text-sm flex items-center gap-1.5 sm:gap-2 transition-all hover:shadow-lg shadow-green-500/10 hover:-translate-y-0.5"
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="text-slate-900 focus:outline-none p-2"
+                aria-label="Alternar menu"
               >
-                <CalendarCheck className="w-4.5 h-4.5" />
-                <span>Agendar pelo WhatsApp</span>
-              </a>
+                {isMobileMenuOpen ? <X className="w-7 h-7 text-[#002241]" /> : <Menu className="w-7 h-7 text-[#002241]" />}
+              </button>
             </div>
           </div>
         </div>
+        {isMobileMenuOpen && (
+          <div className="bg-white border-b border-slate-100 px-6 py-4">
+            <a
+              href={docWhatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#25D366] hover:bg-[#128C7E] text-white w-full py-3 rounded-full font-bold text-center flex items-center justify-center gap-2 transition-all hover:shadow-lg shadow-green-500/10"
+            >
+              <CalendarCheck className="w-5 h-5" />
+              <span>AGENDAR PELO WHATSAPP</span>
+            </a>
+          </div>
+        )}
       </nav>
     );
   }

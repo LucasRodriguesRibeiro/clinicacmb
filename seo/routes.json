@@ -17,11 +17,19 @@
   },
   {
     "path": "/exames",
-    "title": "Exames e Procedimentos - CMB | Diagnósticos e Ultrassonografia",
-    "description": "Realize seus exames laboratoriais, eletrocardiograma (ECG), preventivo e ultrassonografias no CMB. Estrutura moderna e laudos rápidos em Jussara.",
+    "title": "Exames em Jussara | Laboratório e Diagnóstico | CMB Centro Médico da Bahia",
+    "description": "Faça seus exames laboratoriais e de imagem em Jussara com rapidez, tecnologia e atendimento humanizado. Agende agora no Centro Médico da Bahia.",
     "changefreq": "monthly",
-    "priority": 0.8,
-    "keywords": "exames laboratoriais jussara, ultrassom jussara, preventivo papanicolau, ecg jussara, biopsia colo uterino jussara"
+    "priority": 0.9,
+    "keywords": "exames em jussara, laboratorio em jussara, exames laboratoriais jussara, ultrassom em jussara, ecg jussara, preventivo jussara, centro medico jussara"
+  },
+  {
+    "path": "/exames-em-jussara",
+    "title": "Exames em Jussara | Laboratório e Diagnóstico | CMB Centro Médico da Bahia",
+    "description": "Faça seus exames laboratoriais e de imagem em Jussara com rapidez, tecnologia e atendimento humanizado. Agende agora no Centro Médico da Bahia.",
+    "changefreq": "monthly",
+    "priority": 1.0,
+    "keywords": "exames em jussara, laboratorio em jussara, exames laboratoriais jussara, ultrassom em jussara, ecg em jussara, preventivo em jussara, centro medico em jussara, biopsia jussara, colposcopia jussara"
   },
   {
     "path": "/contato",

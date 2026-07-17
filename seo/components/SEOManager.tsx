@@ -105,9 +105,10 @@ export const SEOManager: React.FC = () => {
     } else if (isSpecialtyRoute && matchedSpecialty) {
       breadcrumbItems.push({ name: 'Especialidades', item: `${url}/#especialidades` });
       breadcrumbItems.push({ name: matchedSpecialty.nome, item: canonicalUrl });
+    } else if (pathname === '/exames' || pathname === '/exames-em-jussara') {
+      breadcrumbItems.push({ name: 'Exames em Jussara', item: `${url}/exames-em-jussara` });
     } else {
       const pageName = pathname === '/corpo-clinico' ? 'Corpo Clínico' :
-                       pathname === '/exames' ? 'Exames' :
                        pathname === '/contato' ? 'Contato' : 'Página';
       breadcrumbItems.push({ name: pageName, item: canonicalUrl });
     }
@@ -122,6 +123,33 @@ export const SEOManager: React.FC = () => {
     schemas.push(getFaqSchema(FAQS));
     // Doctor list
     schemas.push(getDoctorsListSchema(DOCTORS));
+  } else if (pathname === '/exames' || pathname === '/exames-em-jussara') {
+    // MedicalClinic + LocalBusiness schema for exam page
+    schemas.push(getMedicalClinicSchema());
+    // FAQ sobre exames
+    const examFaqs = [
+      {
+        question: 'Preciso de pedido médico para fazer exames?',
+        answer: 'Para a maioria dos exames de imagem e laboratoriais via convênio, sim. Para particular, alguns exames podem ser realizados sem guia médica. Entre em contato e nossa equipe orientará você.'
+      },
+      {
+        question: 'Quanto tempo demora o resultado dos exames?',
+        answer: 'Exames laboratoriais simples ficam prontos em até 24h. Ultrassom e ECG geralmente entregamos o laudo logo após a realização do exame, no mesmo dia.'
+      },
+      {
+        question: 'Como devo me preparar para o ultrassom?',
+        answer: 'O preparo varia conforme o tipo (ex: jejum, bexiga cheia). Ao agendar, nossa equipe enviará todas as instruções detalhadas via WhatsApp.'
+      },
+      {
+        question: 'Quais convênios a CMB aceita para exames?',
+        answer: 'Atendemos diversos convênios e também particular com valores acessíveis. Entre em contato pelo WhatsApp para verificar a cobertura do seu plano.'
+      },
+      {
+        question: 'Posso agendar exame para outra pessoa?',
+        answer: 'Sim! Você pode agendar exames para familiares ou dependentes pelo nosso WhatsApp. Basta informar o nome do paciente e o tipo de exame desejado.'
+      }
+    ];
+    schemas.push(getFaqSchema(examFaqs));
   } else if (pathname === '/corpo-clinico') {
     schemas.push(getDoctorsListSchema(DOCTORS));
   } else if (isDoctorRoute && matchedDoctor) {

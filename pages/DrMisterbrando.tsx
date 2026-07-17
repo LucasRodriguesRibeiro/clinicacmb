@@ -1,606 +1,683 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { 
-  CalendarCheck, 
-  ShieldCheck, 
-  Bone, 
-  Activity, 
-  Zap, 
-  RotateCcw, 
-  Flame, 
-  Shield, 
-  Sparkles, 
-  AlertTriangle,
-  Stethoscope,
-  Clock,
-  MapPin,
-  Star,
-  Phone,
-  Mail,
-  ChevronRight,
-  ArrowRight,
-  ShieldAlert
-} from 'lucide-react';
+import React, { useState } from 'react';
 import { CONTACT_INFO } from '../constants';
-import { Logo } from '../components/Logo';
 import { StructuredData } from '../seo/components/StructuredData';
 
-// Framer motion variants
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] } 
-  }
-};
+// WhatsApp SVG icon
+const WaIcon = () => (
+  <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.38 1.26 4.79L2.05 22l5.44-1.43c1.38.75 2.95 1.18 4.55 1.18 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.52 14.17c-.23.63-.67 1.16-1.19 1.44-.44.24-1 .38-1.84.06-1.14-.46-2.28-1.47-3.14-2.33-.86-.86-1.87-2-2.33-3.14-.32-.84-.18-1.4.06-1.84.28-.52.81-.96 1.44-1.19.2-.07.38-.05.51.06.13.11.28.34.44.65.17.35.33.68.39.8.07.14.04.25-.02.36-.07.11-.13.2-.26.33-.13.13-.28.3-.4.44-.12.14-.26.3-.11.57.15.27.67 1.12 1.44 1.82.77.7 1.43 1.08 1.72 1.2.27.11.42.09.58-.06.15-.15.54-.64.68-.86.14-.22.26-.18.44-.11.18.07 1.13.53 1.33.62.2.1.33.14.38.22.05.28.05.7-.18 1.33z"/>
+  </svg>
+);
 
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08
-    }
-  }
-};
+// Shield icon
+const ShieldIcon = () => (
+  <svg width="20" height="20" fill="none" stroke="#0055A4" strokeWidth="2" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+  </svg>
+);
+
+// Heart icon
+const HeartIcon = () => (
+  <svg width="20" height="20" fill="none" stroke="#0055A4" strokeWidth="2" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+  </svg>
+);
+
+// Clock icon
+const ClockIcon = () => (
+  <svg width="20" height="20" fill="none" stroke="#0055A4" strokeWidth="2" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="10"/><path strokeLinecap="round" d="M12 6v6l4 2"/>
+  </svg>
+);
+
+// Arrow Right icon
+const ArrowIcon = () => (
+  <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+  </svg>
+);
+
+// Calendar icon
+const CalIcon = () => (
+  <svg width="28" height="28" fill="none" stroke="white" strokeWidth="1.5" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" strokeDasharray="4 2"/>
+    <path strokeLinecap="round" d="M16 2v4M8 2v4M3 10h18"/>
+  </svg>
+);
+
+// MapPin icon
+const MapIcon = () => (
+  <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+  </svg>
+);
+
+// Phone icon
+const PhoneIcon = () => (
+  <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+  </svg>
+);
+
+// Custom Spine SVG (anatomical, matches mockup)
+const IconColuna = () => (
+  <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="18" y="2" width="8" height="6" rx="2" stroke="#0055A4" strokeWidth="1.6"/>
+    <rect x="18" y="11" width="8" height="6" rx="2" stroke="#0055A4" strokeWidth="1.6"/>
+    <rect x="18" y="20" width="8" height="6" rx="2" stroke="#0055A4" strokeWidth="1.6"/>
+    <rect x="18" y="29" width="8" height="6" rx="2" stroke="#0055A4" strokeWidth="1.6"/>
+    <rect x="18" y="38" width="8" height="4" rx="2" stroke="#0055A4" strokeWidth="1.6"/>
+    <line x1="22" y1="8" x2="22" y2="11" stroke="#0055A4" strokeWidth="1.6"/>
+    <line x1="22" y1="17" x2="22" y2="20" stroke="#0055A4" strokeWidth="1.6"/>
+    <line x1="22" y1="26" x2="22" y2="29" stroke="#0055A4" strokeWidth="1.6"/>
+    <line x1="22" y1="35" x2="22" y2="38" stroke="#0055A4" strokeWidth="1.6"/>
+    <line x1="12" y1="5" x2="18" y2="5" stroke="#0055A4" strokeWidth="1.4"/>
+    <line x1="26" y1="5" x2="32" y2="5" stroke="#0055A4" strokeWidth="1.4"/>
+    <line x1="10" y1="14" x2="18" y2="14" stroke="#0055A4" strokeWidth="1.4"/>
+    <line x1="26" y1="14" x2="34" y2="14" stroke="#0055A4" strokeWidth="1.4"/>
+    <line x1="12" y1="23" x2="18" y2="23" stroke="#0055A4" strokeWidth="1.4"/>
+    <line x1="26" y1="23" x2="32" y2="23" stroke="#0055A4" strokeWidth="1.4"/>
+  </svg>
+);
+
+const IconJoelho = () => (
+  <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M22 4 C14 4, 10 10, 10 18 C10 24, 13 28, 18 30 L18 40" stroke="#0055A4" strokeWidth="1.8" strokeLinecap="round"/>
+    <path d="M22 4 C30 4, 34 10, 34 18 C34 24, 31 28, 26 30 L26 40" stroke="#0055A4" strokeWidth="1.8" strokeLinecap="round"/>
+    <ellipse cx="22" cy="18" rx="6" ry="7" stroke="#0055A4" strokeWidth="1.6" fill="none"/>
+    <line x1="18" y1="40" x2="26" y2="40" stroke="#0055A4" strokeWidth="1.8" strokeLinecap="round"/>
+  </svg>
+);
+
+const IconOmbro = () => (
+  <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="22" cy="12" r="7" stroke="#0055A4" strokeWidth="1.8" fill="none"/>
+    <path d="M15 12 C8 12, 5 16, 5 22 C5 28, 8 34, 14 36" stroke="#0055A4" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
+    <path d="M22 19 L22 38" stroke="#0055A4" strokeWidth="1.8" strokeLinecap="round"/>
+    <path d="M16 36 L28 36" stroke="#0055A4" strokeWidth="1.8" strokeLinecap="round"/>
+  </svg>
+);
+
+const IconEsportivo = () => (
+  <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="30" cy="8" r="4" stroke="#0055A4" strokeWidth="1.8" fill="none"/>
+    <path d="M20 18 L26 14 L32 20 L38 16" stroke="#0055A4" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M20 18 L16 28 L10 32" stroke="#0055A4" strokeWidth="1.8" strokeLinecap="round"/>
+    <path d="M24 24 L28 34 L34 38" stroke="#0055A4" strokeWidth="1.8" strokeLinecap="round"/>
+    <path d="M18 20 L26 22" stroke="#0055A4" strokeWidth="1.6" strokeLinecap="round"/>
+  </svg>
+);
+
+const IconQuadril = () => (
+  <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 14 C10 8, 16 4, 22 4 C28 4, 34 8, 34 14 C34 22, 28 30, 22 32 C16 30, 10 22, 10 14Z" stroke="#0055A4" strokeWidth="1.8" fill="none" strokeLinejoin="round"/>
+    <circle cx="14" cy="18" r="4" stroke="#0055A4" strokeWidth="1.6" fill="none"/>
+    <circle cx="30" cy="18" r="4" stroke="#0055A4" strokeWidth="1.6" fill="none"/>
+    <line x1="14" y1="22" x2="10" y2="40" stroke="#0055A4" strokeWidth="1.8" strokeLinecap="round"/>
+    <line x1="30" y1="22" x2="34" y2="40" stroke="#0055A4" strokeWidth="1.8" strokeLinecap="round"/>
+  </svg>
+);
+
+const IconPe = () => (
+  <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 8 L12 26 C12 30, 14 34, 20 36 L36 36" stroke="#0055A4" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
+    <ellipse cx="12" cy="26" rx="5" ry="4" stroke="#0055A4" strokeWidth="1.6" fill="none"/>
+    <circle cx="24" cy="36" r="2" stroke="#0055A4" strokeWidth="1.4" fill="none"/>
+    <circle cx="30" cy="36" r="2" stroke="#0055A4" strokeWidth="1.4" fill="none"/>
+    <circle cx="36" cy="36" r="2" stroke="#0055A4" strokeWidth="1.4" fill="none"/>
+    <line x1="12" y1="4" x2="12" y2="8" stroke="#0055A4" strokeWidth="1.8" strokeLinecap="round"/>
+  </svg>
+);
+
+// Stepper icons
+const IcoAgendamento = () => (
+  <svg width="22" height="22" fill="none" stroke="#0055A4" strokeWidth="1.8" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+    <line x1="16" y1="2" x2="16" y2="6" strokeLinecap="round"/>
+    <line x1="8" y1="2" x2="8" y2="6" strokeLinecap="round"/>
+    <line x1="3" y1="10" x2="21" y2="10"/>
+  </svg>
+);
+const IcoAvaliacao = () => (
+  <svg width="22" height="22" fill="none" stroke="#0055A4" strokeWidth="1.8" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4"/>
+    <path strokeLinecap="round" d="M4 20c0-3.314 3.582-6 8-6s8 2.686 8 6"/>
+  </svg>
+);
+const IcoDiagnostico = () => (
+  <svg width="22" height="22" fill="none" stroke="#0055A4" strokeWidth="1.8" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
+    <rect x="9" y="3" width="6" height="4" rx="1"/>
+    <line x1="9" y1="12" x2="15" y2="12" strokeLinecap="round"/>
+    <line x1="9" y1="16" x2="12" y2="16" strokeLinecap="round"/>
+  </svg>
+);
+const IcoTratamento = () => (
+  <svg width="22" height="22" fill="none" stroke="#0055A4" strokeWidth="1.8" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+  </svg>
+);
 
 export const DrMisterbrando: React.FC = () => {
-  const whatsappNumber = CONTACT_INFO.whatsapp.replace(/\D/g, '');
-  const docWhatsappUrl = `https://wa.me/55${whatsappNumber}?text=${encodeURIComponent("Olá! Gostaria de agendar uma consulta de Ortopedia com o Dr. Mistebrando em Jussara.")}`;
+  const [menuOpen, setMenuOpen] = useState(false);
+  const waNum = CONTACT_INFO.whatsapp.replace(/\D/g, '');
+  const waUrl = `https://wa.me/55${waNum}?text=${encodeURIComponent('Olá! Gostaria de agendar uma consulta de Ortopedia com o Dr. Misterbrando em Jussara.')}`;
 
-  // Structured Data Schema for SEO
   const physicianSchema = {
     '@context': 'https://schema.org',
     '@type': 'Physician',
-    '@id': 'https://cmbclinica.com.br/drmisterbrando#physician',
-    'name': 'Dr. Mistebrando Machado Gonçalves',
-    'image': 'https://cmbclinica.com.br/profissionais/misterbrando.webp',
-    'telephone': `+55${whatsappNumber}`,
-    'url': 'https://cmbclinica.com.br/drmisterbrando',
-    'medicalSpecialty': 'Orthopedic',
-    'worksFor': {
-      '@type': 'MedicalClinic',
-      '@id': 'https://cmbclinica.com.br/#medicalclinic',
-      'name': 'CMB - Centro Médico da Bahia',
-      'address': {
-        '@type': 'PostalAddress',
-        'streetAddress': 'Praça João Batista, 40 - Centro',
-        'addressLocality': 'Jussara',
-        'addressRegion': 'BA',
-        'postalCode': '44925-000',
-        'addressCountry': 'BR'
-      }
-    },
-    'address': {
+    name: 'Dr. Mistebrando Machado Gonçalves',
+    medicalSpecialty: 'Orthopedic',
+    url: 'https://cmbclinica.com.br/drmisterbrando',
+    telephone: `+55${waNum}`,
+    address: {
       '@type': 'PostalAddress',
-      'streetAddress': 'Praça João Batista, 40 - Centro',
-      'addressLocality': 'Jussara',
-      'addressRegion': 'BA',
-      'postalCode': '44925-000',
-      'addressCountry': 'BR'
+      addressLocality: 'Jussara',
+      addressRegion: 'BA',
+      addressCountry: 'BR'
     }
   };
 
-  const motivos = [
-    { title: 'Dor na coluna', icon: Bone, desc: 'Problemas de postura, contraturas, desgaste articular ou hérnias.' },
-    { title: 'Dor no joelho', icon: Activity, desc: 'Lesões de menisco, ligamento ou desgaste por artrose.' },
-    { title: 'Dor no ombro', icon: ShieldAlert, desc: 'Lesões do manguito rotador, tendinites ou bursites.' },
-    { title: 'Artrose', icon: Sparkles, desc: 'Desgaste crônico das cartilagens nas articulações.' },
-    { title: 'Hérnia de disco', icon: Shield, desc: 'Compressão nervosa que causa fortes dores e formigamento.' },
-    { title: 'Lesões esportivas', icon: Zap, desc: 'Contusões, distensões musculares e estiramentos.' },
-    { title: 'Fraturas', icon: AlertTriangle, desc: 'Tratamento de fraturas ósseas com gesso ou cirurgia.' },
-    { title: 'Entorses', icon: RotateCcw, desc: 'Torções do tornozelo, joelho ou punho com edema.' },
-    { title: 'Tendinites', icon: Flame, desc: 'Processos inflamatórios nos tendões por esforço repetitivo.' },
-    { title: 'Dor no quadril', icon: Activity, desc: 'Desgaste articular, bursite trocantérica ou impacto femoral.' }
+  const treatments = [
+    { label: 'Coluna', Icon: IconColuna },
+    { label: 'Joelho', Icon: IconJoelho },
+    { label: 'Ombro', Icon: IconOmbro },
+    { label: 'Lesões esportivas', Icon: IconEsportivo },
+    { label: 'Quadril', Icon: IconQuadril },
+    { label: 'Pé e tornozelo', Icon: IconPe },
   ];
 
-  const timelineSteps = [
-    { title: 'Agendamento', desc: 'Marque sua consulta de forma simples e rápida através do WhatsApp.' },
-    { title: 'Avaliação Clínica', desc: 'Consulta presencial detalhada, exame físico completo e escuta atenta.' },
-    { title: 'Diagnóstico', desc: 'Análise de exames complementares (se necessário) para identificar a causa exata da dor.' },
-    { title: 'Tratamento Personalizado', desc: 'Definição da melhor conduta clínica, fisioterapêutica ou cirúrgica para seu caso.' }
-  ];
-
-  const diferenciais = [
-    { title: 'Atendimento humanizado', icon: Stethoscope, desc: 'Ouvimos cada paciente com empatia para oferecer o melhor acolhimento.' },
-    { title: 'Equipe especializada', icon: ShieldCheck, desc: 'Profissionais experientes e titulados nas suas respectivas áreas.' },
-    { title: 'Estrutura moderna', icon: Sparkles, desc: 'Consultórios climatizados, modernos e equipados com tecnologia atual.' },
-    { title: 'Localização de fácil acesso', icon: MapPin, desc: 'Situado bem no centro da cidade, facilitando o seu deslocamento.' },
-    { title: 'Agendamento rápido', icon: Clock, desc: 'Processo ágil pelo WhatsApp para você consultar sem esperas.' },
-    { title: 'Diversas especialidades médicas', icon: Activity, desc: 'Uma clínica completa com diversas especialidades e exames.' }
-  ];
-
-  const avaliacoes = [
-    { name: 'Maria Souza', comment: 'Dr. Mistebrando é excelente! Muito atencioso, explicou detalhadamente o meu problema no joelho e o tratamento foi super eficaz.', stars: 5 },
-    { name: 'João Batista Silva', comment: 'O atendimento na clínica é de alto padrão. Dr. Mistebrando resolveu minha dor na coluna que já durava meses. Recomendo muito!', stars: 5 },
-    { name: 'Ana Oliveira', comment: 'Médico muito humano e competente. O tratamento para a tendinite deu ótimos resultados rapidamente.', stars: 5 }
+  const steps = [
+    { num: 1, label: 'Agendamento', desc: 'Você escolhe o melhor horário pelo WhatsApp.', Icon: IcoAgendamento },
+    { num: 2, label: 'Avaliação', desc: 'Entendemos seu caso e realizamos uma avaliação completa.', Icon: IcoAvaliacao },
+    { num: 3, label: 'Diagnóstico', desc: 'Identificamos a causa da dor com precisão.', Icon: IcoDiagnostico },
+    { num: 4, label: 'Tratamento', desc: 'Plano personalizado para sua recuperação e qualidade de vida.', Icon: IcoTratamento },
   ];
 
   return (
-    <div className="flex flex-col w-full bg-white relative">
+    <div style={{ fontFamily: "'Inter', 'Segoe UI', sans-serif", background: '#fff', color: '#002241' }}>
       <StructuredData schema={physicianSchema} />
 
-      {/* HERO SECTION */}
-      <section className="relative overflow-hidden pt-8 pb-16 sm:py-24 bg-gradient-to-br from-white via-slate-50 to-blue-50/20 border-b border-slate-100">
-        <div className="absolute inset-0 opacity-[0.03] bg-pattern-dots pointer-events-none"></div>
-        <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-blue-100/50 blur-3xl opacity-30 pointer-events-none"></div>
+      {/* ───────────── HERO ───────────── */}
+      <section style={{
+        background: '#fff',
+        padding: '0',
+        borderBottom: '1px solid #f0f4f8',
+        overflow: 'hidden',
+        position: 'relative',
+      }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 0 0 24px' }}>
+          {/* Outer wrapper — relative so photo can absolutely position over the text */}
+          <div style={{ position: 'relative', minHeight: 480, display: 'flex', alignItems: 'stretch' }} className="dr-hero-outer">
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            
-            {/* Hero Left Content Column */}
-            <motion.div 
-              className="lg:col-span-7 flex flex-col items-start text-left"
-              variants={staggerContainer}
-              initial="hidden"
-              animate="visible"
-            >
+            {/* ── Blue right panel (background only, no photo inside) ── */}
+            <div className="dr-hero-right" style={{
+              position: 'absolute',
+              right: 0,
+              top: 0,
+              bottom: 0,
+              width: '48%',
+              background: '#E9F2FB',
+              borderRadius: '120px 0 0 0',
+              zIndex: 0,
+            }} />
+
+            {/* ── Left text column ── */}
+            <div className="dr-hero-left" style={{
+              position: 'relative',
+              zIndex: 2,
+              width: '55%',
+              padding: '40px 24px 40px 0',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+            }}>
               {/* Badge */}
-              <motion.div 
-                variants={fadeUp}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-50/80 border border-blue-100/50 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#0a376c] mb-6 shadow-sm"
+              <p className="dr-hero-badge" style={{
+                fontSize: 12,
+                fontWeight: 800,
+                letterSpacing: '0.12em',
+                color: '#0055A4',
+                marginBottom: 12,
+                textTransform: 'uppercase',
+              }}>
+                ESPECIALISTA EM ORTOPEDIA
+              </p>
+
+              {/* H1 */}
+              <h1 className="dr-hero-h1" style={{
+                fontSize: 'clamp(20px, 4vw, 52px)',
+                fontWeight: 900,
+                lineHeight: 1.1,
+                color: '#002241',
+                marginBottom: 16,
+                letterSpacing: '-0.02em',
+              }}>
+                Cuide da sua<br />mobilidade.<br />
+                <span style={{ color: '#002241' }}>Viva sem dor.</span>
+              </h1>
+
+              {/* Sub */}
+              <p className="dr-hero-sub" style={{ fontSize: 14, color: '#4b5563', lineHeight: 1.65, marginBottom: 24, maxWidth: 400, fontWeight: 400 }}>
+                Agende sua consulta com o{' '}
+                <strong style={{ color: '#002241', fontWeight: 700 }}>Dr. Misterbrando</strong>,
+                ortopedista em Jussara, e receba um atendimento humanizado e especializado.
+              </p>
+
+              {/* CTA Button */}
+              <a
+                href={waUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="dr-hero-btn"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 10,
+                  background: '#25D366',
+                  color: '#fff',
+                  fontWeight: 700,
+                  fontSize: 13,
+                  letterSpacing: '0.06em',
+                  padding: '13px 22px',
+                  borderRadius: 999,
+                  textDecoration: 'none',
+                  marginBottom: 24,
+                  boxShadow: '0 4px 20px rgba(37,211,102,0.2)',
+                  textTransform: 'uppercase',
+                  alignSelf: 'flex-start',
+                }}
               >
-                <ShieldCheck className="w-3.5 h-3.5 text-primary-500" />
-                Especialista em Ortopedia
-              </motion.div>
+                <WaIcon />
+                AGENDAR PELO WHATSAPP
+              </a>
 
-              {/* Headline */}
-              <motion.h1 
-                variants={fadeUp}
-                className="text-3.5xl sm:text-5xl lg:text-5.5xl font-black tracking-tight text-slate-900 leading-tight mb-4"
-              >
-                Dor na coluna, joelho, <br className="hidden sm:inline" />
-                ombro ou articulações?
-              </motion.h1>
-
-              {/* Subheadline */}
-              <motion.p 
-                variants={fadeUp}
-                className="text-base sm:text-lg text-slate-600 font-normal mb-8 max-w-xl leading-relaxed"
-              >
-                Agende sua consulta com o <strong>Dr. Mistebrando Machado Gonçalves</strong>, ortopedista em Jussara, e receba um atendimento especializado para diagnóstico e tratamento de dores, lesões e doenças ortopédicas.
-              </motion.p>
-
-              {/* Buttons */}
-              <motion.div 
-                variants={fadeUp}
-                className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-2 w-full sm:w-auto"
-              >
-                <a href={docWhatsappUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
-                  <button className="w-full h-14 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold px-8 py-3 rounded-full shadow-lg shadow-green-500/20 flex items-center justify-center gap-2 transition-all hover:scale-[1.02]">
-                    <CalendarCheck className="w-5 h-5" />
-                    Agendar pelo WhatsApp
-                  </button>
-                </a>
-                <a href="#biografia" className="w-full sm:w-auto">
-                  <button className="w-full h-14 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-bold px-8 py-3 rounded-full shadow-sm flex items-center justify-center gap-2 transition-all">
-                    Conheça o médico
-                  </button>
-                </a>
-              </motion.div>
-            </motion.div>
-
-            {/* Hero Right Column (Doctor Image) */}
-            <motion.div 
-              className="lg:col-span-5 flex justify-center relative"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {/* Decorative health element grid */}
-              <div className="absolute -top-6 -left-6 w-16 h-16 bg-blue-50 text-blue-300 rounded-full blur-xl opacity-70 pointer-events-none"></div>
-              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-blue-100 text-blue-200 rounded-full blur-2xl opacity-40 pointer-events-none"></div>
-
-              <div className="w-full max-w-[380px] lg:max-w-none aspect-[4/5] rounded-[32px] overflow-hidden border-8 border-white shadow-2xl relative bg-slate-50">
-                <img
-                  src="/profissionais/misterbrando.webp"
-                  alt="Foto do Dr. Mistebrando Machado Gonçalves - Ortopedista"
-                  className="w-full h-full object-cover"
-                  style={{ objectPosition: 'center 20%' }}
-                  fetchPriority="high"
-                  loading="eager"
-                />
-                
-                {/* Floating identity card on Desktop */}
-                <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-sm border border-slate-100 p-4 rounded-2xl shadow-xl">
-                  <p className="text-sm font-black text-slate-800 leading-tight">Dr. Mistebrando M. Gonçalves</p>
-                  <p className="text-[11px] text-[#0055A4] font-bold mt-0.5">Médico Ortopedista — CRM-BA 11857</p>
-                </div>
-              </div>
-            </motion.div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 2 (MOTIVOS / SYMPTOMS) */}
-      <section className="py-20 bg-slate-50 border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <motion.div 
-            className="text-center mb-16"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-            variants={fadeUp}
-          >
-            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-              Quando procurar um Ortopedista?
-            </h2>
-            <p className="mt-4 text-slate-600 text-sm sm:text-base max-w-xl mx-auto">
-              A dor é o sinal de alerta do seu corpo. Encontre tratamento especializado para aliviar o desconforto e recuperar sua mobilidade total.
-            </p>
-          </motion.div>
-
-          {/* Grid stack */}
-          <motion.div 
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-16"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            variants={staggerContainer}
-          >
-            {motivos.map((item, index) => {
-              const IconComp = item.icon;
-              return (
-                <motion.div 
-                  key={index} 
-                  variants={fadeUp}
-                  className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-red-50 text-[#D32F2F] flex items-center justify-center mb-4 flex-shrink-0">
-                    <IconComp className="w-5 h-5" />
-                  </div>
-                  <h3 className="text-sm font-bold text-slate-800 mb-2 leading-snug">{item.title}</h3>
-                  <p className="text-[11px] text-slate-500 leading-relaxed">{item.desc}</p>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-
-          {/* WhatsApp button inside section */}
-          <div className="text-center">
-            <a href={docWhatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-block">
-              <button className="bg-[#25D366] hover:bg-[#128C7E] text-white font-bold px-10 py-4 rounded-full shadow-md flex items-center justify-center gap-2 transition-all hover:scale-105">
-                <CalendarCheck className="w-5 h-5" />
-                Agendar Minha Consulta
-              </button>
-            </a>
-          </div>
-
-        </div>
-      </section>
-
-      {/* SECTION 3 (BIOGRAPHY) */}
-      <section id="biografia" className="py-20 bg-white border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            
-            {/* Left columns (Info) */}
-            <motion.div 
-              className="lg:col-span-7 flex flex-col items-start"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              variants={fadeUp}
-            >
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#0a376c] mb-6">
-                Corpo Clínico CMB
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight mb-6">
-                Conheça o Dr. Mistebrando
-              </h2>
-              <div className="prose prose-slate max-w-none text-slate-600 text-sm sm:text-base space-y-6 leading-relaxed">
-                <p>
-                  O <strong>Dr. Mistebrando Machado Gonçalves</strong> é médico ortopedista, inscrito no <strong>CRM-BA 11857</strong>, altamente qualificado e dedicado ao diagnóstico, prevenção e tratamento de doenças e lesões que acometem ossos, músculos, articulações, tendões e ligamentos.
-                </p>
-                <p>
-                  Seu atendimento no Centro Médico da Bahia é pautado na escuta atenta, no diagnóstico clínico preciso e no planejamento de tratamento individualizado. Ele atua buscando restaurar a mobilidade, aliviar a dor e devolver qualidade de vida e bem-estar aos pacientes da região de Jussara - BA.
-                </p>
-              </div>
-            </motion.div>
-
-            {/* Right columns (Doctor Photo) */}
-            <motion.div 
-              className="lg:col-span-5 flex justify-center"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              variants={fadeUp}
-            >
-              <div className="w-full max-w-[340px] aspect-square rounded-[32px] overflow-hidden border-8 border-slate-50 shadow-xl relative bg-slate-50">
-                <img
-                  src="/profissionais/misterbrando.webp"
-                  alt="Dr. Mistebrando Machado Gonçalves no consultório"
-                  className="w-full h-full object-cover"
-                  style={{ objectPosition: 'center 15%' }}
-                  loading="lazy"
-                />
-              </div>
-            </motion.div>
-
-          </div>
-
-          {/* Section CTA */}
-          <div className="text-center mt-16">
-            <a href={docWhatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-block">
-              <button className="bg-[#25D366] hover:bg-[#128C7E] text-white font-bold px-10 py-4 rounded-full shadow-md flex items-center justify-center gap-2 transition-all hover:scale-105">
-                <CalendarCheck className="w-5 h-5" />
-                Agendar Consulta com Ortopedista
-              </button>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 4 (TIMELINE) */}
-      <section className="py-20 bg-slate-50 border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <motion.div 
-            className="text-center mb-16"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-            variants={fadeUp}
-          >
-            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-              Como funciona sua consulta
-            </h2>
-            <p className="mt-4 text-slate-600 text-sm sm:text-base max-w-xl mx-auto">
-              Seguimos um fluxo estruturado para garantir que você receba um diagnóstico detalhado e o melhor planejamento terapêutico.
-            </p>
-          </motion.div>
-
-          {/* Timeline Wrapper */}
-          <div className="relative max-w-4xl mx-auto">
-            {/* Vertical connector line on Mobile, Horizontal on Desktop */}
-            <div className="absolute left-[20px] top-6 bottom-6 w-[2px] bg-blue-100 md:hidden"></div>
-            <div className="absolute left-6 right-6 top-[28px] h-[2px] bg-blue-100 hidden md:block"></div>
-
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              {timelineSteps.map((step, index) => (
-                <motion.div 
-                  key={index}
-                  className="flex gap-4 md:flex-col md:items-center md:text-center relative z-10"
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: '-65px' }}
-                  variants={fadeUp}
-                >
-                  {/* Step Number Circle */}
-                  <div className="w-10 h-10 rounded-full bg-[#0055A4] text-white flex items-center justify-center font-bold text-sm flex-shrink-0 shadow-lg shadow-blue-500/10">
-                    {index + 1}
+              {/* Trust bar */}
+              <div className="dr-trust-bar" style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 0,
+                background: '#fff',
+                border: '1px solid #e8eef4',
+                borderRadius: 16,
+                padding: '12px 16px',
+                maxWidth: 400,
+                boxShadow: '0 2px 16px rgba(0,34,65,0.04)',
+              }}>
+                {/* CRM */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1 }}>
+                  <div className="dr-trust-icon" style={{ width: 34, height: 34, borderRadius: '50%', background: '#f0f6ff', border: '1px solid #e0ecff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <ShieldIcon />
                   </div>
                   <div>
-                    <h3 className="text-base font-black text-slate-800 mb-1 leading-snug">{step.title}</h3>
-                    <p className="text-xs text-slate-500 leading-relaxed">{step.desc}</p>
+                    <p className="dr-trust-label" style={{ fontSize: 10, fontWeight: 800, color: '#002241', letterSpacing: '0.08em', margin: 0, textTransform: 'uppercase' }}>CRM-BA</p>
+                    <p className="dr-trust-value" style={{ fontSize: 11, fontWeight: 600, color: '#64748b', margin: 0 }}>11857</p>
                   </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Section CTA */}
-          <div className="text-center mt-16">
-            <a href={docWhatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-block">
-              <button className="bg-[#25D366] hover:bg-[#128C7E] text-white font-bold px-10 py-4 rounded-full shadow-md flex items-center justify-center gap-2 transition-all hover:scale-105">
-                <CalendarCheck className="w-5 h-5" />
-                Agendar pelo WhatsApp
-              </button>
-            </a>
-          </div>
-
-        </div>
-      </section>
-
-      {/* SECTION 5 (CMB BENEFITS / WHY US) */}
-      <section className="py-20 bg-white border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <motion.div 
-            className="text-center mb-16"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-            variants={fadeUp}
-          >
-            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-              Por que escolher o Centro Médico da Bahia?
-            </h2>
-            <p className="mt-4 text-slate-600 text-sm sm:text-base max-w-xl mx-auto">
-              Somos referência em cuidados de saúde em Jussara, unindo corpo médico qualificado a uma infraestrutura moderna.
-            </p>
-          </motion.div>
-
-          {/* Advantages Cards Grid */}
-          <motion.div 
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={staggerContainer}
-          >
-            {diferenciais.map((item, index) => {
-              const IconComp = item.icon;
-              return (
-                <motion.div 
-                  key={index} 
-                  variants={fadeUp}
-                  className="bg-slate-50 border border-slate-100/50 p-6 rounded-2xl flex flex-col items-center text-center hover:shadow-md transition-shadow"
-                >
-                  <div className="w-12 h-12 bg-blue-50 text-[#0055A4] rounded-2xl flex items-center justify-center mb-4 flex-shrink-0 shadow-inner">
-                    <IconComp className="w-6 h-6" />
-                  </div>
-                  <h3 className="text-base font-bold text-slate-800 mb-2 leading-snug">{item.title}</h3>
-                  <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-
-          {/* Section CTA */}
-          <div className="text-center">
-            <a href={docWhatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-block">
-              <button className="bg-[#25D366] hover:bg-[#128C7E] text-white font-bold px-10 py-4 rounded-full shadow-md flex items-center justify-center gap-2 transition-all hover:scale-105">
-                <CalendarCheck className="w-5 h-5" />
-                Agendar Consulta Online
-              </button>
-            </a>
-          </div>
-
-        </div>
-      </section>
-
-      {/* SECTION 6 (TESTIMONIALS) */}
-      <section className="py-20 bg-slate-50 border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <motion.div 
-            className="text-center mb-16"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-            variants={fadeUp}
-          >
-            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-              O que dizem os pacientes
-            </h2>
-            <p className="mt-4 text-slate-600 text-sm sm:text-base max-w-xl mx-auto">
-              A opinião e satisfação dos nossos pacientes são o reflexo do nosso compromisso diário com a saúde.
-            </p>
-          </motion.div>
-
-          {/* Testimonial Cards Grid */}
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={staggerContainer}
-          >
-            {avaliacoes.map((item, index) => (
-              <motion.div 
-                key={index} 
-                variants={fadeUp}
-                className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-100 shadow-sm flex flex-col items-center text-center"
-              >
-                {/* 5 Stars */}
-                <div className="flex gap-1 mb-4 text-amber-400">
-                  {[...Array(item.stars)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-amber-400" />
-                  ))}
                 </div>
-                <p className="text-xs sm:text-sm text-slate-600 italic leading-relaxed mb-6 flex-grow">
-                  "{item.comment}"
-                </p>
-                <h3 className="text-xs sm:text-sm font-bold text-[#0a376c] uppercase tracking-wide">{item.name}</h3>
-              </motion.div>
-            ))}
-          </motion.div>
+                <div className="dr-trust-divider" style={{ width: 1, height: 28, background: '#e2e8f0', margin: '0 12px', flexShrink: 0 }} />
+                {/* Atendimento */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1 }}>
+                  <div className="dr-trust-icon" style={{ width: 34, height: 34, borderRadius: '50%', background: '#f0f6ff', border: '1px solid #e0ecff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <HeartIcon />
+                  </div>
+                  <div>
+                    <p className="dr-trust-label" style={{ fontSize: 10, fontWeight: 800, color: '#002241', letterSpacing: '0.08em', margin: 0, textTransform: 'uppercase' }}>ATENDIMENTO</p>
+                    <p className="dr-trust-value" style={{ fontSize: 11, fontWeight: 600, color: '#64748b', margin: 0 }}>HUMANIZADO</p>
+                  </div>
+                </div>
+                <div className="dr-trust-divider" style={{ width: 1, height: 28, background: '#e2e8f0', margin: '0 12px', flexShrink: 0 }} />
+                {/* Agendamento */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1 }}>
+                  <div className="dr-trust-icon" style={{ width: 34, height: 34, borderRadius: '50%', background: '#f0f6ff', border: '1px solid #e0ecff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <ClockIcon />
+                  </div>
+                  <div>
+                    <p className="dr-trust-label" style={{ fontSize: 10, fontWeight: 800, color: '#002241', letterSpacing: '0.08em', margin: 0, textTransform: 'uppercase' }}>AGENDAMENTO</p>
+                    <p className="dr-trust-value" style={{ fontSize: 11, fontWeight: 600, color: '#64748b', margin: 0 }}>RÁPIDO</p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-          {/* Section CTA */}
-          <div className="text-center">
-            <a href={docWhatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-block">
-              <button className="bg-[#25D366] hover:bg-[#128C7E] text-white font-bold px-10 py-4 rounded-full shadow-md flex items-center justify-center gap-2 transition-all hover:scale-105">
-                <CalendarCheck className="w-5 h-5" />
-                Agendar via WhatsApp
-              </button>
-            </a>
+            {/* ── Doctor photo — absolutely positioned, overlapping both columns ── */}
+            <div style={{
+              position: 'absolute',
+              right: 0,
+              bottom: 0,
+              width: '52%',
+              height: '100%',
+              display: 'flex',
+              alignItems: 'flex-end',
+              justifyContent: 'center',
+              zIndex: 3,
+              pointerEvents: 'none',
+            }} className="dr-photo-wrapper">
+              <img
+                src="/profissionais/misterbrando-semfundo.webp"
+                alt="Dr. Misterbrando Machado Gonçalves — Ortopedista"
+                fetchPriority="high"
+                loading="eager"
+                style={{
+                  width: '90%',
+                  maxWidth: 420,
+                  height: '100%',
+                  objectFit: 'contain',
+                  objectPosition: 'center bottom',
+                  display: 'block',
+                  filter: 'drop-shadow(0 8px 24px rgba(0,34,65,0.10))',
+                }}
+              />
+            </div>
+
           </div>
-
         </div>
       </section>
 
-      {/* SECTION 7 (FINAL CTA) */}
-      <section className="relative py-24 overflow-hidden bg-gradient-primary">
-        <div className="absolute inset-0 bg-black/10"></div>
-        <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/medical-icons.png')]"></div>
-
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <span className="inline-block py-1 px-3 rounded-full bg-white/10 text-white text-xs font-bold tracking-wider uppercase mb-6 backdrop-blur-sm">
-            Não Conviva com a Dor
-          </span>
-          <h2 className="text-3xl sm:text-4.5xl font-black text-white mb-6 leading-tight max-w-2xl mx-auto">
-            Não deixe que a dor limite sua qualidade de vida.
-          </h2>
-          <p className="text-blue-100 mb-10 text-base sm:text-lg font-light max-w-xl mx-auto">
-            Agende sua consulta com o Dr. Mistebrando e conte com um atendimento especializado para cuidar da sua saúde.
+      {/* ───────────── SECTION 2: O QUE EU TRATO ───────────── */}
+      <section style={{ padding: '72px 24px', background: '#fff', borderBottom: '1px solid #f0f4f8' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <p style={{ textAlign: 'center', fontSize: 12, fontWeight: 800, letterSpacing: '0.12em', color: '#0055A4', textTransform: 'uppercase', marginBottom: 12 }}>
+            O QUE EU TRATO
           </p>
-          <div className="flex justify-center">
-            <a href={docWhatsappUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
-              <button className="w-full h-14 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold px-10 py-3 rounded-full shadow-xl flex items-center justify-center gap-2 transition-all hover:scale-105">
-                <CalendarCheck className="w-5 h-5" />
-                Agendar pelo WhatsApp
-              </button>
+          <h2 style={{ textAlign: 'center', fontSize: 'clamp(22px, 4vw, 36px)', fontWeight: 900, color: '#002241', marginBottom: 48, letterSpacing: '-0.02em', lineHeight: 1.2 }}>
+            Tratamento para dores e lesões<br />que limitam sua vida.
+          </h2>
+
+          {/* 6 cards grid */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
+            gap: 16,
+            marginBottom: 32,
+          }}>
+            {treatments.map(({ label, Icon }) => (
+              <div key={label} style={{
+                background: '#fff',
+                border: '1px solid #e8eef4',
+                borderRadius: 16,
+                padding: '24px 12px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 12,
+                boxShadow: '0 2px 16px rgba(0,34,65,0.03)',
+                textAlign: 'center',
+                cursor: 'default',
+              }}>
+                <Icon />
+                <span style={{ fontSize: 13, fontWeight: 700, color: '#002241', lineHeight: 1.3 }}>{label}</span>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ textAlign: 'center' }}>
+            <a href={waUrl} target="_blank" rel="noopener noreferrer" style={{
+              display: 'inline-flex', alignItems: 'center', gap: 6,
+              color: '#0055A4', fontWeight: 800, fontSize: 13, letterSpacing: '0.08em',
+              textDecoration: 'none', textTransform: 'uppercase',
+            }}>
+              VER TODOS OS TRATAMENTOS <ArrowIcon />
             </a>
           </div>
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="bg-slate-900 text-slate-300 py-16 border-t border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-12">
-            
-            {/* Col 1: Brand details */}
-            <div className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left">
-              <div className="mb-6">
-                <Logo theme="dark" className="h-10" />
-              </div>
-              <p className="text-sm leading-relaxed text-slate-400 max-w-md mb-6">
-                O Centro Médico da Bahia em Jussara - BA é sinônimo de agilidade, segurança e humanização no cuidado médico especializado.
+      {/* ───────────── SECTION 3: SOBRE O MÉDICO ───────────── */}
+      <section style={{ padding: '72px 24px', background: '#fff', borderBottom: '1px solid #f0f4f8' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{
+            background: '#F0F6FF',
+            borderRadius: 24,
+            padding: '40px',
+            display: 'grid',
+            gridTemplateColumns: '280px 1fr',
+            gap: 40,
+            alignItems: 'center',
+          }}
+          className="dr-bio-grid"
+          >
+            {/* Photo */}
+            <img
+              src="/profissionais/misterbrando.webp"
+              alt="Dr. Misterbrando Machado"
+              loading="lazy"
+              style={{
+                width: '100%',
+                height: 340,
+                objectFit: 'cover',
+                objectPosition: 'center 10%',
+                borderRadius: 16,
+                display: 'block',
+              }}
+            />
+
+            {/* Bio text */}
+            <div>
+              <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.12em', color: '#0055A4', textTransform: 'uppercase', marginBottom: 8 }}>
+                SOBRE O MÉDICO
               </p>
-              <div className="text-xs text-slate-400">
-                <p>CNPJ: 09.157.211/0002-98</p>
-                <p className="mt-1">Dr. Mistebrando Machado Gonçalves (CRM-BA 11857)</p>
-              </div>
+              <h2 style={{ fontSize: 'clamp(22px, 3vw, 30px)', fontWeight: 900, color: '#002241', marginBottom: 4, letterSpacing: '-0.01em' }}>
+                Dr. Misterbrando Machado
+              </h2>
+              <p style={{ fontSize: 13, fontWeight: 700, color: '#0055A4', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 20 }}>
+                Ortopedista &nbsp;|&nbsp; CRM-BA 11857
+              </p>
+              <p style={{ fontSize: 14, color: '#475569', lineHeight: 1.75, marginBottom: 16, fontWeight: 400 }}>
+                Médico ortopedista dedicado ao diagnóstico, prevenção e tratamento de doenças e lesões que acometem ossos, músculos, articulações, tendões e ligamentos.
+              </p>
+              <p style={{ fontSize: 14, color: '#475569', lineHeight: 1.75, fontWeight: 400 }}>
+                Seu atendimento é pautado na escuta atenta, diagnóstico preciso e tratamento individualizado, buscando devolver qualidade de vida e bem-estar aos pacientes.
+              </p>
             </div>
-
-            {/* Col 2: Contact info */}
-            <div className="lg:col-span-4 flex flex-col items-center lg:items-start text-center lg:text-left">
-              <h3 className="text-white font-bold text-sm uppercase tracking-wider mb-4">Contato & Localização</h3>
-              <ul className="space-y-4 text-sm flex flex-col items-center lg:items-start">
-                <li className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-primary-300 flex-shrink-0 mt-0.5" />
-                  <span>{CONTACT_INFO.address}</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <Phone className="w-5 h-5 text-primary-300 flex-shrink-0" />
-                  <span>{CONTACT_INFO.phone}</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <Mail className="w-5 h-5 text-primary-300 flex-shrink-0" />
-                  <span>{CONTACT_INFO.email}</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Col 3: Iframe Map */}
-            <div className="lg:col-span-3 w-full h-[200px]">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3904.6067711200216!2d-41.9715104!3d-11.0470697!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x742617f7c11f7c1d%3A0xe2128c7ef39cf87f!2sPrac%CC%A7a%20Joa%CC%83o%20Batista%2C%20Jussara%20-%20BA%2C%2044925-000!5e0!3m2!1spt-BR!2sbr!4v1710000000000!5m2!1spt-BR!2sbr"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen={true}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Mapa de Localização Centro Médico da Bahia"
-                className="w-full h-full rounded-2xl shadow-sm border border-slate-800"
-              ></iframe>
-            </div>
-
-          </div>
-
-          <div className="border-t border-slate-800 pt-8 text-center text-xs text-slate-400">
-            <p>&copy; {new Date().getFullYear()} CMB - Centro Médico da Bahia. Todos os direitos reservados.</p>
           </div>
         </div>
+      </section>
+
+      {/* ───────────── SECTION 4: COMO FUNCIONA ───────────── */}
+      <section style={{ padding: '72px 24px', background: '#fff', borderBottom: '1px solid #f0f4f8' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <p style={{ textAlign: 'center', fontSize: 12, fontWeight: 800, letterSpacing: '0.12em', color: '#0055A4', textTransform: 'uppercase', marginBottom: 56 }}>
+            COMO FUNCIONA SUA CONSULTA
+          </p>
+
+          {/* Steps row */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24, position: 'relative' }} className="dr-steps-grid">
+            {/* Connecting line */}
+            <div style={{
+              position: 'absolute',
+              top: 28,
+              left: '12.5%',
+              right: '12.5%',
+              height: 0,
+              borderTop: '2px dashed #cbd5e1',
+              zIndex: 0,
+            }} />
+
+            {steps.map(({ num, label, desc, Icon }) => (
+              <div key={num} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', position: 'relative', zIndex: 1 }}>
+                {/* Circle with icon */}
+                <div style={{ position: 'relative', marginBottom: 16 }}>
+                  <div style={{
+                    width: 56, height: 56,
+                    borderRadius: '50%',
+                    background: '#fff',
+                    border: '1.5px solid #e2e8f0',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    boxShadow: '0 2px 12px rgba(0,34,65,0.06)',
+                  }}>
+                    <Icon />
+                  </div>
+                  {/* Number badge */}
+                  <span style={{
+                    position: 'absolute', top: -4, right: -4,
+                    width: 20, height: 20,
+                    background: '#0055A4', color: '#fff',
+                    borderRadius: '50%',
+                    fontSize: 11, fontWeight: 800,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  }}>{num}</span>
+                </div>
+                <h3 style={{ fontSize: 14, fontWeight: 700, color: '#002241', marginBottom: 6 }}>{label}</h3>
+                <p style={{ fontSize: 12, color: '#64748b', lineHeight: 1.6, fontWeight: 400 }}>{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────── SECTION 5: CTA FINAL ───────────── */}
+      <section style={{ padding: '32px 24px 56px' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{
+            background: '#002241',
+            borderRadius: 20,
+            padding: '40px 48px',
+            display: 'grid',
+            gridTemplateColumns: '1fr auto',
+            gap: 32,
+            alignItems: 'center',
+          }}
+          className="dr-cta-grid"
+          >
+            {/* Left */}
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 20 }}>
+              <div style={{
+                width: 52, height: 52,
+                borderRadius: '50%',
+                border: '1.5px dashed rgba(255,255,255,0.3)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                flexShrink: 0,
+              }}>
+                <CalIcon />
+              </div>
+              <div>
+                <h2 style={{ fontSize: 'clamp(18px, 2.5vw, 24px)', fontWeight: 900, color: '#fff', marginBottom: 8, lineHeight: 1.25 }}>
+                  Não deixe que a dor limite sua qualidade de vida.
+                </h2>
+                <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)', lineHeight: 1.65, fontWeight: 400 }}>
+                  Agende sua consulta com o Dr. Misterbrando e conte com um atendimento especializado para cuidar da sua saúde.
+                </p>
+              </div>
+            </div>
+            {/* CTA */}
+            <a
+              href={waUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 10,
+                background: '#25D366',
+                color: '#fff',
+                fontWeight: 700,
+                fontSize: 13,
+                letterSpacing: '0.06em',
+                padding: '14px 24px',
+                borderRadius: 999,
+                textDecoration: 'none',
+                textTransform: 'uppercase',
+                whiteSpace: 'nowrap',
+                boxShadow: '0 4px 20px rgba(37,211,102,0.25)',
+                flexShrink: 0,
+              }}
+            >
+              <WaIcon />
+              AGENDAR PELO WHATSAPP
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────── FOOTER ───────────── */}
+      <footer style={{ background: '#f8fafc', borderTop: '1px solid #e8eef4', padding: '32px 24px' }}>
+        <div style={{
+          maxWidth: 1200,
+          margin: '0 auto',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 0,
+          flexWrap: 'wrap',
+        }}>
+          <FooterItem icon={<MapIcon />} text="Jussara - BA" />
+          <FooterDivider />
+          <FooterItem icon={<PhoneIcon />} text={CONTACT_INFO.phone} />
+          <FooterDivider />
+          <FooterItem icon={<WaIcon />} text={CONTACT_INFO.whatsapp} />
+        </div>
+        <p style={{ textAlign: 'center', fontSize: 11, color: '#94a3b8', marginTop: 16 }}>
+          © {new Date().getFullYear()} CMB — Centro Médico da Bahia. Todos os direitos reservados.
+        </p>
       </footer>
 
+      {/* ───────────── RESPONSIVE CSS ───────────── */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+
+        /* ── Hero always 2 columns ── */
+        .dr-hero-grid  { display: grid; grid-template-columns: 1fr 1fr !important; }
+        .dr-bio-grid   { grid-template-columns: 260px 1fr !important; }
+        .dr-steps-grid { grid-template-columns: repeat(4, 1fr) !important; }
+        .dr-cta-grid   { grid-template-columns: 1fr auto !important; }
+
+        /* Mobile: keep side-by-side, shrink elements */
+        @media (max-width: 600px) {
+          .dr-hero-left {
+            padding-top: 16px !important;
+            padding-bottom: 16px !important;
+            padding-right: 8px !important;
+          }
+          .dr-hero-badge  { font-size: 8px !important; margin-bottom: 6px !important; }
+          .dr-hero-h1     { font-size: 18px !important; margin-bottom: 8px !important; line-height: 1.15 !important; }
+          .dr-hero-sub    { font-size: 11px !important; margin-bottom: 12px !important; display: none; }
+          .dr-hero-btn    { font-size: 9px !important; padding: 10px 12px !important; gap: 5px !important; margin-bottom: 12px !important; }
+          .dr-trust-bar   { padding: 8px !important; border-radius: 10px !important; gap: 0 !important; }
+          .dr-trust-divider { margin: 0 6px !important; }
+          .dr-trust-icon  { display: none !important; }
+          .dr-trust-label { font-size: 8px !important; }
+          .dr-trust-value { font-size: 9px !important; }
+          .dr-hero-right  { min-height: 220px !important; border-radius: 60px 0 0 0 !important; }
+        }
+
+        /* Non-hero responsive */
+        @media (max-width: 768px) {
+          .dr-bio-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .dr-steps-grid {
+            grid-template-columns: 1fr 1fr !important;
+          }
+          .dr-cta-grid {
+            grid-template-columns: 1fr !important;
+            text-align: center;
+          }
+          .dr-cta-grid > div {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+          }
+          .dr-cta-grid > a {
+            width: 100%;
+            justify-content: center;
+          }
+        }
+      `}</style>
     </div>
   );
 };
+
+const FooterItem: React.FC<{ icon: React.ReactNode; text: string }> = ({ icon, text }) => (
+  <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#64748b', fontSize: 13, padding: '8px 16px' }}>
+    {icon}
+    <span>{text}</span>
+  </div>
+);
+
+const FooterDivider = () => (
+  <div style={{ width: 1, height: 20, background: '#e2e8f0' }} />
+);
+
 export default DrMisterbrando;

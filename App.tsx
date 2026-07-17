@@ -6,6 +6,7 @@ import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { Home } from './pages/Home';
 import { Especialidade } from './pages/Especialidade';
 import { DrMisterbrando } from './pages/DrMisterbrando';
+import { Exames } from './pages/Exames';
 import { SEOManager } from './seo/components/SEOManager';
 import { ScrollToSection } from './seo/components/ScrollToSection';
 import { Analytics } from './seo/components/Analytics';
@@ -22,7 +23,8 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/corpo-clinico" element={<Home />} />
-            <Route path="/exames" element={<Home />} />
+            <Route path="/exames" element={<Exames />} />
+            <Route path="/exames-em-jussara" element={<Exames />} />
             <Route path="/contato" element={<Home />} />
             <Route path="/especialidades/:slug" element={<Especialidade />} />
             <Route path="/drmisterbrando" element={<DrMisterbrando />} />
