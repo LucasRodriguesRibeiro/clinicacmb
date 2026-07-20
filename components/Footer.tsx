@@ -34,8 +34,15 @@ export const Footer: React.FC = () => {
             <h3 className="text-white font-semibold mb-4 uppercase tracking-wider text-sm">Contato</h3>
             <ul className="space-y-4 text-sm flex flex-col items-start">
               <li className="flex items-start text-left">
-                <MapPin className="w-5 h-5 mr-3 text-primary-300 flex-shrink-0" />
-                <span>{CONTACT_INFO.address}</span>
+                <a
+                  href={CONTACT_INFO.googleMapsUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CONTACT_INFO.address)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-start text-left hover:text-white transition-colors"
+                >
+                  <MapPin className="w-5 h-5 mr-3 text-primary-300 flex-shrink-0 mt-0.5" />
+                  <span>{CONTACT_INFO.address}</span>
+                </a>
               </li>
               <li className="flex items-center text-left">
                 <Phone className="w-5 h-5 mr-3 text-primary-300 flex-shrink-0" />

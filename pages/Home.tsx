@@ -132,6 +132,17 @@ export const Home: React.FC = () => {
                       Falar no WhatsApp
                     </button>
                   </a>
+                  <a
+                    href={CONTACT_INFO.googleMapsUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CONTACT_INFO.address)}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-full sm:w-auto"
+                  >
+                    <button className="w-full bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-bold px-6 py-3.5 rounded-xl shadow-sm flex items-center justify-center gap-2 transition-all hover:border-slate-300">
+                      <MapPin className="w-5 h-5 text-red-500" />
+                      Ver Localização
+                    </button>
+                  </a>
                 </motion.div>
 
 

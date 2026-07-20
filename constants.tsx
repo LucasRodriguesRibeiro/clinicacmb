@@ -23,7 +23,8 @@ export const CONTACT_INFO: ContactInfo = {
   whatsapp: "(74) 99816-2793",
   address: "Praça João Batista, 40 - Centro, Jussara - BA",
   hours: "Segunda a Sexta: 07h às 18h | Sábado: 07h às 12h",
-  email: "contato@cmb.com.br"
+  email: "contato@cmb.com.br",
+  googleMapsUrl: "https://www.google.com/maps/place/Cl%C3%ADnica+CMB+%7C+Centro+M%C3%A9dico+da+Bahia/@-11.0484603,-41.9765269,17z/data=!3m1!4b1!4m6!3m5!1s0x76f21dd6a78d119:0x9d2997d7ab046b91!8m2!3d-11.0484656!4d-41.973952!16s%2Fg%2F11xyrc_ct0"
 };
 
 export const DOCTORS: Doctor[] = [
